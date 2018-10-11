@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.",
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": "8.11.1"
-},
+  },
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
