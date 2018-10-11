@@ -4,6 +4,7 @@ const { ActivityTypes,
     TurnContext } = require('botbuilder');
 const { ChoicePrompt,
     DialogSet,
+    DialogTurnResult,
     DialogTurnStatus,
     ListStyle } = require('botbuilder-dialogs');
 
@@ -305,7 +306,7 @@ class SGSuperMartBot {
             }
         });
 
-        await turnContext.sendActivity({
+        await turnContext.sendActivities({
             text: 'Here is a promotion from ' + supermarket,
             attachments: cardList
         });
