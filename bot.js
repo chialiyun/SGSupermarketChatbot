@@ -109,8 +109,8 @@ class SGSuperMartBot {
                                 // Create the PromptOptions which contain the prompt and reprompt messages.
                                 // PromptOptions also contains the list of choices available to the user.
                                 const promptOptions = {
-                                    prompt: 'Please select a Super Market:',
-                                    reprompt: 'That was not a valid choice, please select a Super Market or number from 1 to 5.',
+                                    prompt: 'Please select a Supermarket:',
+                                    reprompt: 'That was not a valid choice, please select a Supermarket or number from 1 to 5.',
                                     choices: this.getChoices()
                                 };
 
@@ -271,13 +271,12 @@ class SGSuperMartBot {
         }
 
         let response = await getPromo();
-        //console.log(response); //for debugging
+        console.log(response); //for debugging
         let cardList = [];
         let url;
         let imgLink;
         let title;
         let store;
-        response = response.slice(0, 5);
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
@@ -304,13 +303,9 @@ class SGSuperMartBot {
                 cardList.push(promoCard);
             }
         });
-        // await turnContext.sendActivity({
-        //     text: 'Here is an Super Market Promotion:',
-        //     attachments: [await cardList[2]]
-        // });
 
         await turnContext.sendActivity({
-            text: 'Here is an Super Market Promotion:',
+            text: 'Here is a promotion from ' + store,
             attachments: cardList
         });
 
