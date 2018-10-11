@@ -305,7 +305,7 @@ class SGSuperMartBot {
         });
 
         await turnContext.sendActivity({
-            text: 'Here is a promotion from ' + store,
+            text: 'Here is a promotion from ' + supermarket,
             attachments: cardList
         });
 
