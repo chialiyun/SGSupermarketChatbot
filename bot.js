@@ -306,10 +306,17 @@ class SGSuperMartBot {
             }
         });
 
-        await turnContext.sendActivities({
-            text: 'Here is a promotion from ' + supermarket,
-            attachments: cardList
-        });
+        // await turnContext.sendActivity({
+        //     text: 'Here is a promotion from ' + supermarket,
+        //     attachments: cardList
+        // });
+
+        let newList;
+        cardList.forEach(data => {
+            newList.push({attachments: [data]});
+        })
+
+        await turnContext.sendActivities(newList);
 
         // for (let i = 0; i < cardList.length; i++) {
         //     await turnContext.sendActivity({
