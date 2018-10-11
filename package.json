@@ -1,0 +1,30 @@
+{
+  "name": "sgsupermartbot",
+  "version": "1.0.0",
+  "description": "SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.",
+  "main": "index.js",
+  "engines":{
+    "node": "8.11.1"
+},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chialiyun/SGSuperMartBot.git"
+  },
+  "author": "Chia Li Yun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chialiyun/SGSuperMartBot/issues"
+  },
+  "homepage": "https://github.com/chialiyun/SGSuperMartBot#readme",
+  "dependencies": {
+    "botbuilder": "^4.0.6",
+    "botbuilder-ai": "^4.0.6",
+    "botbuilder-dialogs": "^4.0.6",
+    "node-fetch": "^2.2.0",
+    "restify": "^7.2.1"
+  }
+}
