@@ -308,13 +308,18 @@ class SGSuperMartBot {
         //     attachments: [await cardList[2]]
         // });
 
-        for (let i = 0; i < cardList.length; i++) {
-            await turnContext.sendActivity({
-                text: 'Here is an Super Market Promotion:',
-                attachments: [cardList[i]]
-            });
+        await turnContext.sendActivity({
+                    text: 'Here is an Super Market Promotion:',
+                    attachments: [CardFactory.adaptiveCard(cardList)]
+                });
 
-        }
+        // for (let i = 0; i < cardList.length; i++) {
+        //     await turnContext.sendActivity({
+        //         text: 'Here is an Super Market Promotion:',
+        //         attachments: [cardList[i]]
+        //     });
+
+        // }
     }
 }
 exports.SGSuperMartBot = SGSuperMartBot;
