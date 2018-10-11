@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chialiyun/SGSuperMartBot.git"
+    "url": "git+https://github.com/chialiyun/SGSupermarketChatbot.git"
   },
   "author": "Chia Li Yun",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chialiyun/SGSuperMartBot/issues"
+    "url": "https://github.com/chialiyun/SGSupermarketChatbot/issues"
   },
-  "homepage": "https://github.com/chialiyun/SGSuperMartBot#readme",
+  "homepage": "https://github.com/chialiyun/SGSupermarketChatbot#readme",
   "dependencies": {
     "botbuilder": "^4.0.6",
     "botbuilder-ai": "^4.0.6",
