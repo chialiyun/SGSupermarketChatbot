@@ -277,6 +277,7 @@ class SGSuperMartBot {
         let imgLink;
         let title;
         let store;
+        response = response.slice(0, 5);
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
@@ -300,7 +301,6 @@ class SGSuperMartBot {
                         }
                     ])
                 );
-
                 cardList.push(promoCard);
             }
         });
