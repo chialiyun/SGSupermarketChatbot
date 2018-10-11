@@ -277,6 +277,7 @@ class SGSuperMartBot {
         let imgLink;
         let title;
         let store;
+        response = response.slice(0, response.length < 6 ? response.length : 5);
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
