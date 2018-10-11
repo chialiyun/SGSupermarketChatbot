@@ -300,6 +300,7 @@ class SGSuperMartBot {
                     }
                 ])
             );
+
             cardList.push(promoCard);
         }
         });
@@ -310,7 +311,7 @@ class SGSuperMartBot {
 
         await turnContext.sendActivity({
                     text: 'Here is an Super Market Promotion:',
-                    attachments: [CardFactory.adaptiveCard(cardList)]
+                    attachments: cardList
                 });
 
         // for (let i = 0; i < cardList.length; i++) {
@@ -318,7 +319,6 @@ class SGSuperMartBot {
         //         text: 'Here is an Super Market Promotion:',
         //         attachments: [cardList[i]]
         //     });
-
         // }
     }
 }
