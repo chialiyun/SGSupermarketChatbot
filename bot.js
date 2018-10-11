@@ -131,7 +131,7 @@ class SGSuperMartBot {
                         break;
                     case DialogTurnStatus.complete:
                         // All child dialogs have ended. so do nothing.
-                                await this.createCardResponse(turnContext, dialogResult);
+                        await this.createCardResponse(turnContext, dialogResult);
                         break;
                     default:
                         // Unrecognized status from child dialog. Cancel all dialogs.
@@ -252,20 +252,20 @@ class SGSuperMartBot {
         let supermarket;
         switch (dialogTurnResult.result.value) {
             case 'FairPrice':
-            supermarket = dialogTurnResult.result.value;
-            break;
+                supermarket = dialogTurnResult.result.value;
+                break;
             case 'Sheng Siong':
-            supermarket = dialogTurnResult.result.value;
-            break;
+                supermarket = dialogTurnResult.result.value;
+                break;
             case 'Giant':
-            supermarket = dialogTurnResult.result.value;
-            break;
+                supermarket = dialogTurnResult.result.value;
+                break;
             case 'Cold Storage':
-            supermarket = dialogTurnResult.result.value;
-            break;
+                supermarket = dialogTurnResult.result.value;
+                break;
             case 'Prime':
-            supermarket = dialogTurnResult.result.value;
-            break;
+                supermarket = dialogTurnResult.result.value;
+                break;
             default:
                 await turnContext.sendActivity('An invalid selection was parsed. No corresponding Supermarkets were found.');
         }
@@ -279,30 +279,30 @@ class SGSuperMartBot {
         let store;
         response.forEach(data => {
             store = data.store;
-            if(store.includes(supermarket)){
+            if (store.includes(supermarket)) {
                 title = data.title;
                 imgLink = data.imgLink;
-                if(data.pdfLink !== "null"){
+                if (data.pdfLink !== "null") {
                     url = data.pdfLink;
                 }
-                else{
+                else {
                     url = imgLink;
                 }
                 console.log(imgLink);
-            let promoCard = CardFactory.heroCard(
-                store,
-                CardFactory.images([imgLink]),
-                CardFactory.actions([
-                    {
-                        type: 'showImage',
-                        title: title,
-                        value: url
-                    }
-                ])
-            );
+                let promoCard = CardFactory.heroCard(
+                    store,
+                    CardFactory.images([imgLink]),
+                    CardFactory.actions([
+                        {
+                            type: 'showImage',
+                            title: title,
+                            value: url
+                        }
+                    ])
+                );
 
-            cardList.push(promoCard);
-        }
+                cardList.push(promoCard);
+            }
         });
         // await turnContext.sendActivity({
         //     text: 'Here is an Super Market Promotion:',
@@ -310,9 +310,9 @@ class SGSuperMartBot {
         // });
 
         await turnContext.sendActivity({
-                    text: 'Here is an Super Market Promotion:',
-                    attachments: cardList
-                });
+            text: 'Here is an Super Market Promotion:',
+            attachments: cardList
+        });
 
         // for (let i = 0; i < cardList.length; i++) {
         //     await turnContext.sendActivity({
