@@ -8,6 +8,7 @@ function getPromo() {
         .then(res => res.json())
         .then(jsonResponse => {
             if (jsonResponse && jsonResponse.length > 0) {
+                console.log("json " + jsonResponse)
                 return jsonResponse;
             } else {
                 return "Error";

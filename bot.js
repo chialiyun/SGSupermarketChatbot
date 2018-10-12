@@ -39,11 +39,16 @@ class SGSuperMartBot {
 
         // Add the LUIS recognizer.
         this.luisRecognizer = new LuisRecognizer({
-            //Best Practice is to use application settings and not hardcode.
-            applicationId: process.env.LuisAppId,
-            endpoint: process.env.LuisEndpoint,
-            // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
-            endpointKey: process.env.LuisEndpointKey
+             //Best Practice is to use application settings and not hardcode.
+             applicationId: '5f42832363b2497197f0afb2ed1e3302',
+             endpoint: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31595183-f159-4ddc-b2d3-3673c0ba9b46?subscription-key=5f42832363b2497197f0afb2ed1e3302&timezoneOffset=-360&q=',
+             // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
+             endpointKey: '5f42832363b2497197f0afb2ed1e3302'
+            // //Best Practice is to use application settings and not hardcode.
+            // applicationId: process.env.LuisAppId,
+            // endpoint: process.env.LuisEndpoint,
+            // // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
+            // endpointKey: process.env.LuisEndpointKey
 
         });
 
@@ -272,13 +277,13 @@ class SGSuperMartBot {
         }
 
         let response = await getPromo();
-        console.log(response); //for debugging
+        // console.log(response); //for debugging
         let cardList = [];
         let url;
         let imgLink;
         let title;
         let store;
-        response = response.slice(0, response.length < 6 ? response.length : 5);
+        // response = response.slice(0, response.length < 6 ? response.length : 5);
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
@@ -306,19 +311,14 @@ class SGSuperMartBot {
             }
         });
 
+
+        console.log("carlis" + JSON.stringify(cardList))
         await turnContext.sendActivity({
-            text: 'Here is a promotion from ' + supermarket,
-            attachments: [cardList]
-        });
-
-        // for (let i = 0; i < cardList.length; i++) {
-        //     await turnContext.sendActivity({
-        //         text: 'Here is an Super Market Promotion:',
-        //         attachments: [cardList[i]]
-        //     });
-        // }
-
-        
+            "type": "message",
+            "text": "Here are the list of promotion from " + supermarket,
+            "attachmentLayout": "carousel",
+            "attachments": cardList
+        })
     }
 }
 exports.SGSuperMartBot = SGSuperMartBot;
