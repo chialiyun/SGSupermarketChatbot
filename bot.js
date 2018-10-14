@@ -284,7 +284,7 @@ class SGSuperMartBot {
 
         await turnContext.sendActivity({
             "type": "message",
-            "text": "Here are the list of promotion from " + supermarket,
+            "text": "There are " + cardList.length + " promotion from " + supermarket,
             "attachmentLayout": "carousel",
             "attachments": cardList
         })
@@ -312,47 +312,48 @@ class SGSuperMartBot {
                 await turnContext.sendActivity('An invalid selection was parsed. No corresponding Supermarkets were found.');
         }
 
-        let response = await getPromo();
-        // console.log(response); //for debugging
-        let cardList = [];
-        let url;
-        let imgLink;
-        let title;
-        let store;
-        response.forEach(data => {
-            store = data.store;
-            if (store.includes(supermarket)) {
-                title = data.title;
-                imgLink = data.imgLink;
-                if (data.pdfLink !== "null") {
-                    url = data.pdfLink;
-                }
-                else {
-                    url = imgLink;
-                }
-                // console.log(imgLink);
-                let promoCard = CardFactory.heroCard(
-                    "",
-                    CardFactory.images([imgLink]),
-                    CardFactory.actions([
-                        {
-                            type: 'showImage',
-                            title: title,
-                            value: url
-                        }
-                    ])
-                );
-                cardList.push(promoCard);
-            }
-        });
+        await this.sendPromo(turnContext, supermarket)
+        // let response = await getPromo();
+        // // console.log(response); //for debugging
+        // let cardList = [];
+        // let url;
+        // let imgLink;
+        // let title;
+        // let store;
+        // response.forEach(data => {
+        //     store = data.store;
+        //     if (store.includes(supermarket)) {
+        //         title = data.title;
+        //         imgLink = data.imgLink;
+        //         if (data.pdfLink !== "null") {
+        //             url = data.pdfLink;
+        //         }
+        //         else {
+        //             url = imgLink;
+        //         }
+        //         // console.log(imgLink);
+        //         let promoCard = CardFactory.heroCard(
+        //             "",
+        //             CardFactory.images([imgLink]),
+        //             CardFactory.actions([
+        //                 {
+        //                     type: 'showImage',
+        //                     title: title,
+        //                     value: url
+        //                 }
+        //             ])
+        //         );
+        //         cardList.push(promoCard);
+        //     }
+        // });
 
 
-        await turnContext.sendActivity({
-            "type": "message",
-            "text": "Here are the list of promotion from " + supermarket,
-            "attachmentLayout": "carousel",
-            "attachments": cardList
-        })
+        // await turnContext.sendActivity({
+        //     "type": "message",
+        //     "text": "Here are the list of promotion from " + supermarket,
+        //     "attachmentLayout": "carousel",
+        //     "attachments": cardList
+        // })
     }
 
     /**
