@@ -267,12 +267,17 @@ class SGSuperMartBot {
                 }
                 // console.log(imgLink);
                 let promoCard = CardFactory.heroCard(
-                    "",
+                    title,
                     CardFactory.images([imgLink]),
                     CardFactory.actions([
                         {
+                            type: 'openUrl',
+                            title: 'View',
+                            value: url
+                        },
+                        {
                             type: 'showImage',
-                            title: title,
+                            title: 'Share',
                             value: url
                         }
                     ])
