@@ -12,10 +12,19 @@ const { getPromo } = require('./APICall');
 const { LuisRecognizer } = require('botbuilder-ai');
 
 const GREETING_INTENT = 'Greeting';
+const GETSUPERMARKET_INTENT = 'GetSupermarket';
 const CANCEL_INTENT = 'Cancel';
 // const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
 const PROMPT_ID = 'cardPrompt';
+
+const FAIRPRICE_ENTITY = ['Fairprice'];
+const FAIRPRICE_XTRA_ENTITY = ['Fairprice_Xtra'];
+const FAIRPRICE_FINEST_ENTITY = ['Fairprice_Finest'];
+const GIANT_ENTITY = ['Giant'];
+const COLDSTORAGE_ENTITY = ['Cold_Storage'];
+const PRIME_ENTITY = ['Prime'];
+const SHENG_SIONG_ENTITY = ['Sheng_Siong']
 
 /**
  * A bot that sends SGSuperMarket Promotions to the user when it receives a message.
@@ -39,11 +48,11 @@ class SGSuperMartBot {
 
         // Add the LUIS recognizer.
         this.luisRecognizer = new LuisRecognizer({
-             //Best Practice is to use application settings and not hardcode.
-             applicationId: '5f42832363b2497197f0afb2ed1e3302',
-             endpoint: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31595183-f159-4ddc-b2d3-3673c0ba9b46?subscription-key=5f42832363b2497197f0afb2ed1e3302&timezoneOffset=-360&q=',
-             // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
-             endpointKey: '5f42832363b2497197f0afb2ed1e3302'
+            //Best Practice is to use application settings and not hardcode.
+            applicationId: '5f42832363b2497197f0afb2ed1e3302',
+            endpoint: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31595183-f159-4ddc-b2d3-3673c0ba9b46?subscription-key=5f42832363b2497197f0afb2ed1e3302&timezoneOffset=-360&q=',
+            // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
+            endpointKey: '5f42832363b2497197f0afb2ed1e3302'
             // //Best Practice is to use application settings and not hardcode.
             // applicationId: process.env.LuisAppId,
             // endpoint: process.env.LuisEndpoint,
@@ -124,11 +133,20 @@ class SGSuperMartBot {
                                 await dc.prompt(PROMPT_ID, promptOptions);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
                                 break;
+                            case GETSUPERMARKET_INTENT:
+                                var supermarket = await this.getEntity(results, turnContext);
+
+                                await turnContext.sendActivity('We are getting promotions from ' + supermarket + '...');
+
+                                // Send supermarket promotions
+                                await this.sendPromo(turnContext, supermarket)
+
+                                break;
                             case NONE_INTENT:
                             default:
                                 // None or no intent identified, either way, let's provide some help
                                 // to the user
-                                await dc.context.sendActivity(`I didn't understand what you just said to me.`);
+                                await dc.context.sendActivity(`Sorry, I didn't understand what you just said to me.`);
                                 break;
                         }
                         break;
@@ -168,32 +186,6 @@ class SGSuperMartBot {
 
         await this.conversationState.saveChanges(turnContext);
     }
-
-    // /**
-    //  * Send a Rich Card response to the user based on their choice.
-    //  *
-    //  * This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
-    //  * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
-    //  * @param {DialogTurnResult} dialogTurnResult Contains the result from any called Dialogs and indicates the status of the DialogStack.
-    //  */
-    // async sendCardResponse(turnContext, dialogTurnResult) {
-    //     switch (dialogTurnResult.result.value) {
-    //         case 'Animation Card':
-    //             await turnContext.sendActivity({ attachments: [this.createAnimationCard()] });
-    //             break;
-    //         case 'Audio Card':
-    //             await turnContext.sendActivity({ attachments: [this.createAudioCard()] });
-    //             break;
-    //         case 'Hero Card':
-    //             await turnContext.sendActivity({ attachments: [this.createHeroCard()] });
-    //             break;
-    //         case 'Receipt Card':
-    //             await turnContext.sendActivity({ attachments: [this.createReceiptCard()] });
-    //             break;
-    //         default:
-    //             await turnContext.sendActivity('An invalid selection was parsed. No corresponding Rich Cards were found.');
-    //     }
-    // }
 
     /**
      * Look at the LUIS results and determine if we need to handle
@@ -254,6 +246,50 @@ class SGSuperMartBot {
         return cardOptions;
     }
 
+    async sendPromo(turnContext, supermarket) {
+        let response = await getPromo();
+        // console.log(response); //for debugging
+        let cardList = [];
+        let url;
+        let imgLink;
+        let title;
+        let store;
+        response.forEach(data => {
+            store = data.store;
+            if (store.includes(supermarket)) {
+                title = data.title;
+                imgLink = data.imgLink;
+                if (data.pdfLink !== "null") {
+                    url = data.pdfLink;
+                }
+                else {
+                    url = imgLink;
+                }
+                // console.log(imgLink);
+                let promoCard = CardFactory.heroCard(
+                    "",
+                    CardFactory.images([imgLink]),
+                    CardFactory.actions([
+                        {
+                            type: 'showImage',
+                            title: title,
+                            value: url
+                        }
+                    ])
+                );
+                cardList.push(promoCard);
+            }
+        });
+
+
+        await turnContext.sendActivity({
+            "type": "message",
+            "text": "Here are the list of promotion from " + supermarket,
+            "attachmentLayout": "carousel",
+            "attachments": cardList
+        })
+    }
+
     async createCardResponse(turnContext, dialogTurnResult) {
         let supermarket;
         switch (dialogTurnResult.result.value) {
@@ -283,7 +319,6 @@ class SGSuperMartBot {
         let imgLink;
         let title;
         let store;
-        // response = response.slice(0, response.length < 6 ? response.length : 5);
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
@@ -295,9 +330,9 @@ class SGSuperMartBot {
                 else {
                     url = imgLink;
                 }
-                console.log(imgLink);
+                // console.log(imgLink);
                 let promoCard = CardFactory.heroCard(
-                    store,
+                    "",
                     CardFactory.images([imgLink]),
                     CardFactory.actions([
                         {
@@ -312,7 +347,6 @@ class SGSuperMartBot {
         });
 
 
-        console.log("carlis" + JSON.stringify(cardList))
         await turnContext.sendActivity({
             "type": "message",
             "text": "Here are the list of promotion from " + supermarket,
@@ -320,6 +354,59 @@ class SGSuperMartBot {
             "attachments": cardList
         })
     }
+
+    /**
+     * Helper function to update user profile with entities returned by LUIS.
+     *
+     * @param {LuisResults} luisResults - LUIS recognizer results
+     * @param {DialogContext} dc - dialog context
+     */
+    async getEntity(luisResult, context) {
+        console.log(luisResult)
+        var supermarket;
+        // Check if entity exist
+        if (Object.keys(luisResult.entities).length !== 1) {
+            // see if we have any supermarket entities
+            SHENG_SIONG_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "Sheng Siong"
+                }
+            });
+            FAIRPRICE_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "FairPrice"
+                }
+            });
+            FAIRPRICE_FINEST_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "FairPrice Finest"
+                }
+            });
+            FAIRPRICE_XTRA_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "FairPrice Xtra"
+                }
+            });
+            GIANT_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "Giant"
+                }
+            });
+            COLDSTORAGE_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "Cold Storage"
+                }
+            });
+            PRIME_ENTITY.forEach(name => {
+                if (luisResult.entities[name] !== undefined) {
+                    supermarket = "Prime"
+                }
+            });
+        }
+
+        return supermarket;
+    }
+
 }
 exports.SGSuperMartBot = SGSuperMartBot;
 
