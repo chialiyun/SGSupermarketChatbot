@@ -13,10 +13,17 @@ const { LuisRecognizer } = require('botbuilder-ai');
 
 const GREETING_INTENT = 'Greeting';
 const GETSUPERMARKET_INTENT = 'GetSupermarket';
+const GETPROMOTION_INTENT = 'GetPromotions';
 const CANCEL_INTENT = 'Cancel';
 // const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
 const PROMPT_ID = 'cardPrompt';
+
+// For result dictionary
+const STORE_TYPE = "STORE";
+const PRODUCT_TYPE = "PRODUCT";
+const RESULT_TYPE = "TYPE";
+const RESULT_VALUE = "VALUE";
 
 const FAIRPRICE_ENTITY = ['Fairprice'];
 const FAIRPRICE_XTRA_ENTITY = ['Fairprice_Xtra'];
@@ -50,7 +57,7 @@ class SGSuperMartBot {
         this.luisRecognizer = new LuisRecognizer({
             //Best Practice is to use application settings and not hardcode.
             applicationId: '5f42832363b2497197f0afb2ed1e3302',
-            endpoint: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31595183-f159-4ddc-b2d3-3673c0ba9b46?subscription-key=5f42832363b2497197f0afb2ed1e3302&timezoneOffset=-360&q=',
+            endpoint: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/9a0561ef-c191-4ff7-8700-f1561385462f?subscription-key=5f42832363b2497197f0afb2ed1e3302&timezoneOffset=-360&q=',
             // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
             endpointKey: '5f42832363b2497197f0afb2ed1e3302'
             // //Best Practice is to use application settings and not hardcode.
@@ -141,6 +148,16 @@ class SGSuperMartBot {
                                 // Send supermarket promotions
                                 await this.sendPromo(turnContext, supermarket)
 
+                                break;
+                            case GETPROMOTION_INTENT:
+                                var result = await this.getPromoEntity(results, turnContext);
+                                console.log(result);
+
+                                if (result[RESULT_TYPE] == STORE_TYPE)
+                                    // Send supermarket promotions
+                                    await this.sendPromo(turnContext, result[RESULT_VALUE])
+                                else
+                                    console.log("prouct");
                                 break;
                             case NONE_INTENT:
                             default:
@@ -293,6 +310,35 @@ class SGSuperMartBot {
             "attachmentLayout": "carousel",
             "attachments": cardList
         })
+    }
+
+    async getPromoEntity(luisResult, context) {
+        console.log("Result: ");
+        console.log(luisResult);
+        let result = {};
+        let type;
+        let value;
+        console.log("Entities: ");
+        console.log(luisResult.entities);
+        //Check if entities contains either stores or products.
+        if (luisResult.entities.stores) {
+            type = "store";
+            value = luisResult.entities.stores[0][0];
+            result[RESULT_TYPE] = STORE_TYPE;
+            result[RESULT_VALUE] = value;
+            await context.sendActivity('We are getting promotions from ' + value + '...');
+        }
+        else if (luisResult.entities.products) {
+            type = "product";
+            value = luisResult.entities.products[0];
+            result[RESULT_TYPE] = PRODUCT_TYPE;
+            result[RESULT_VALUE] = value;
+            await context.sendActivity('We are getting promotions for ' + value + '...');
+        }
+        else
+            await context.sendActivity('Sorry, I do not understand what you are saying.');
+
+        return result;
     }
 
     async createCardResponse(turnContext, dialogTurnResult) {
