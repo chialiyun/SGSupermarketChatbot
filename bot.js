@@ -8,7 +8,11 @@ const { ChoicePrompt,
     DialogTurnStatus,
     ListStyle } = require('botbuilder-dialogs');
 
-const { getPromo } = require('./APICall');
+const { getPromo,
+    getNTUCProduct,
+    getColdStorageProduct,
+    getShengSiongProduct,
+    resultKey } = require('./APICall');
 const { LuisRecognizer } = require('botbuilder-ai');
 
 const GREETING_INTENT = 'Greeting';
@@ -24,6 +28,12 @@ const STORE_TYPE = "STORE";
 const PRODUCT_TYPE = "PRODUCT";
 const RESULT_TYPE = "TYPE";
 const RESULT_VALUE = "VALUE";
+
+const FAIRPRICE = "Fairprice";
+const GIANT = "Giant";
+const COLDSTORAGE = "Cold Storage";
+const PRIME = "Prime";
+const SHENG_SIONG = "Sheng Siong";
 
 const FAIRPRICE_ENTITY = ['Fairprice'];
 const FAIRPRICE_XTRA_ENTITY = ['Fairprice_Xtra'];
@@ -153,11 +163,19 @@ class SGSuperMartBot {
                                 var result = await this.getPromoEntity(results, turnContext);
                                 console.log(result);
 
+                                // To send store adverstisement
                                 if (result[RESULT_TYPE] == STORE_TYPE)
                                     // Send supermarket promotions
                                     await this.sendPromo(turnContext, result[RESULT_VALUE])
-                                else
+                                else if (result[RESULT_TYPE] == PRODUCT_TYPE) {// To send product list
                                     console.log("prouct");
+                                    // var response = await getNTUCProduct(result);
+                                    // console.log("resulttttt-" + response)
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + FAIRPRICE + '...');
+                                    await this.sendProductPromo(turnContext, FAIRPRICE, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + COLDSTORAGE + '...');
+                                    await this.sendProductPromo(turnContext, COLDSTORAGE, result[RESULT_VALUE]);
+                                }
                                 break;
                             case NONE_INTENT:
                             default:
@@ -307,6 +325,59 @@ class SGSuperMartBot {
         await turnContext.sendActivity({
             "type": "message",
             "text": "There are " + cardList.length + " promotion from " + supermarket,
+            "attachmentLayout": "carousel",
+            "attachments": cardList
+        })
+    }
+
+    async sendProductPromo(turnContext, store, product) {
+        let response;
+        switch (store) {
+            case FAIRPRICE:
+                response = await getNTUCProduct(product);
+                break;
+            case COLDSTORAGE:
+                response = await getColdStorageProduct(product);
+                break;
+        }
+        console.log(response);
+        let cardList = [];
+
+        response.forEach(data => {
+            // console.log(imgLink);
+            var text = "";
+
+            if (data[resultKey.PRODUCT_ORIGINAL_PRICE] !== "")
+                text += "ORIGINAL PRICE IS " + data[resultKey.PRODUCT_ORIGINAL_PRICE];
+            if (data[resultKey.PRODUCT_DISCOUNTED_PRICE] !== "")
+                text += "\nNOW IS " + data[resultKey.PRODUCT_DISCOUNTED_PRICE]
+            if (data[resultKey.PRODUCT_ADDITIONAL_PROMO] !== "")
+                text += "\n\n" + data[resultKey.PRODUCT_ADDITIONAL_PROMO]
+            if (data[resultKey.PRODUCT_PROMO_EXPIRY] !== "")
+                text += "\n\n Promotion Till:\n" + data[resultKey.PRODUCT_PROMO_EXPIRY]
+
+            console.log(text);
+
+            let promoCard = CardFactory.heroCard(
+                data[resultKey.PRODUCT_NAME],
+                text,
+                CardFactory.images([data[resultKey.PRODUCT_IMAGE_URL]]),
+                CardFactory.actions([
+                    {
+                        type: 'openUrl',
+                        title: 'View details',
+                        value: data[resultKey.PRODUCT_URL]
+                    }
+                ]),
+
+            );
+            cardList.push(promoCard);
+        });
+
+
+        await turnContext.sendActivity({
+            "type": "message",
+            "text": "There are " + cardList.length + " " + product + " promotion from " + store,
             "attachmentLayout": "carousel",
             "attachments": cardList
         })
