@@ -188,6 +188,8 @@ async function getShengSiongProduct(name) {
     return productList;
 }
 
+
+getGiantProduct('milo');
 async function getGiantProduct(name) {
     const productList = [];
     const url = giantSearchURL + name;
@@ -209,7 +211,11 @@ async function getGiantProduct(name) {
         const offer = productData.find('.product-discount-label').text();
 
         const productURL = productData.attr('data-url');
-        const productImgURL = productData.find('.img img').attr('src');
+        let productImgURL = productData.find('.img img').attr('src');
+
+        if (productImgURL.indexOf("http") < 0)
+            productImgURL = giantURL + productImgURL
+
         product[PRODUCT_URL] = giantURL + productURL;
         product[PRODUCT_IMAGE_URL] = productImgURL;
 

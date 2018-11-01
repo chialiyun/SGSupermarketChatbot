@@ -172,12 +172,12 @@ class SGSuperMartBot {
                                     console.log("prouct");
                                     // var response = await getNTUCProduct(result);
                                     // console.log("resulttttt-" + response)
-                                    // await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + FAIRPRICE + '...');
-                                    // await this.sendProductPromo(turnContext, FAIRPRICE, result[RESULT_VALUE]);
-                                    // await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + COLDSTORAGE + '...');
-                                    // await this.sendProductPromo(turnContext, COLDSTORAGE, result[RESULT_VALUE]);
-                                    // await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + SHENG_SIONG + '...');
-                                    // await this.sendProductPromo(turnContext, SHENG_SIONG, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + FAIRPRICE + '...');
+                                    await this.sendProductPromo(turnContext, FAIRPRICE, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + COLDSTORAGE + '...');
+                                    await this.sendProductPromo(turnContext, COLDSTORAGE, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + SHENG_SIONG + '...');
+                                    await this.sendProductPromo(turnContext, SHENG_SIONG, result[RESULT_VALUE]);
                                     await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + GIANT + '...');
                                     await this.sendProductPromo(turnContext, GIANT, result[RESULT_VALUE]);
                                 }
