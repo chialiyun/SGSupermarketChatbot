@@ -12,6 +12,7 @@ const { getPromo,
     getNTUCProduct,
     getColdStorageProduct,
     getShengSiongProduct,
+    getGiantProduct,
     resultKey } = require('./APICall');
 const { LuisRecognizer } = require('botbuilder-ai');
 
@@ -175,6 +176,10 @@ class SGSuperMartBot {
                                     await this.sendProductPromo(turnContext, FAIRPRICE, result[RESULT_VALUE]);
                                     await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + COLDSTORAGE + '...');
                                     await this.sendProductPromo(turnContext, COLDSTORAGE, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + SHENG_SIONG + '...');
+                                    await this.sendProductPromo(turnContext, SHENG_SIONG, result[RESULT_VALUE]);
+                                    await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + GIANT + '...');
+                                    await this.sendProductPromo(turnContext, GIANT, result[RESULT_VALUE]);
                                 }
                                 break;
                             case NONE_INTENT:
@@ -338,6 +343,12 @@ class SGSuperMartBot {
                 break;
             case COLDSTORAGE:
                 response = await getColdStorageProduct(product);
+                break;
+            case SHENG_SIONG: 
+                response = await getShengSiongProduct(product);
+                break;
+            case GIANT: 
+                response = await getGiantProduct(product);
                 break;
         }
         console.log(response);

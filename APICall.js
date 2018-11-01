@@ -15,6 +15,8 @@ const fairpriceSearchURL = "https://www.fairprice.com.sg/searchterm/";
 const coldStorageSearchURL = "https://coldstorage.com.sg/search?q=";
 const coldStorageURL = "https://coldstorage.com.sg/";
 const shengSiongSearchURL = "https://allforyou.sg/search?q=";
+const giantSearchURL = "https://giantonline.com.sg/search?q=";
+const giantURL = "https://giantonline.com.sg/product";
 
 async function getPromo() {
     const url = "https://khubite.000webhostapp.com/app/sg_supermarket/data_v1.json";
@@ -118,7 +120,7 @@ async function getColdStorageProduct(name) {
         // If there is offer
         if (offer !== "") {
             product[PRODUCT_ADDITIONAL_PROMO] = offer;
-            
+
             const currentPrice = productData.find('.content_price .product-price').text().trim();
             // Special Offer
             if (offer.includes("BUY")) {
@@ -139,7 +141,6 @@ async function getColdStorageProduct(name) {
     return productList;
 }
 
-getShengSiongProduct('milo');
 async function getShengSiongProduct(name) {
     const productList = [];
     const url = shengSiongSearchURL + name;
@@ -158,30 +159,79 @@ async function getShengSiongProduct(name) {
         const productName = productData.find('.prodname span').text();
         product[PRODUCT_NAME] = productName;
 
+        const hiddenData = productData.find('.prod-data');
+
         const productURL = productData.find('.product-link').attr('href');
-        var productImgURL = productData.find('#productImageThumb').attr('style');
-        productImgURL = productImgURL.substring(productImgURL.lastIndexOf("(") + 1, productImgURL.lastIndexOf(")"))
+        // var productImgURL = productData.find('#productImageThumb').attr('style');
+        var productImgURL = hiddenData.attr('data-imgurl');
         product[PRODUCT_URL] = shengSiongSearchURL + productName;
         product[PRODUCT_IMAGE_URL] = productImgURL;
 
+        const hasOffer = hiddenData.attr('data-hasoffers');
         // If there is offer
-        if (productData.find('.prodnamelink').html().indexOf("offerStickerOverlay") >= 0) {
+        if (hasOffer === "True") {
             console.log(productName)
-            // const specialOffer = productData.find('.prodnameoffer span').text()
-            // product[PRODUCT_ADDITIONAL_PROMO] = specialOffer;
-            // // If no Special Offer
-            // if (specialOffer === "") {
-            //     product[PRODUCT_ORIGINAL_PRICE] = currentPrice;
-            // } else {
-            //     product[PRODUCT_DISCOUNTED_PRICE] = currentPrice;
 
-            //     const originalPrice = productData.find('.content_info span').text().trim()
-            //     product[PRODUCT_ORIGINAL_PRICE] = originalPrice;
-            // }
+            const offerName = hiddenData.attr('data-offername');
+            product[PRODUCT_ADDITIONAL_PROMO] = offerName;
+            const currentPrice = hiddenData.attr('data-price');
+            product[PRODUCT_DISCOUNTED_PRICE] = currentPrice;
+            const originalPrice = hiddenData.attr('data-oldprice');
+            product[PRODUCT_ORIGINAL_PRICE] = originalPrice
 
             product[PRODUCT_PROMO_EXPIRY] = "";
 
             productList.push(product);
+        }
+    }
+
+    return productList;
+}
+
+async function getGiantProduct(name) {
+    const productList = [];
+    const url = giantSearchURL + name;
+
+    const response = await fetch(url, { method: 'get' });
+    const htmlData = await response.text();
+
+    const $ = cheerio.load(htmlData);
+
+    const productsData = $('.items li');
+    for (let i = 0; i < productsData.length; i += 1) {
+        const productData = $(productsData[i]);
+
+        const product = {};
+
+        const productName = productData.find('.product-name a').text();
+        product[PRODUCT_NAME] = productName;
+
+        const offer = productData.find('.product-discount-label').text();
+
+        const productURL = productData.attr('data-url');
+        const productImgURL = productData.find('.img img').attr('src');
+        product[PRODUCT_URL] = giantURL + productURL;
+        product[PRODUCT_IMAGE_URL] = productImgURL;
+
+        // If there is offer
+        if (offer !== "") {
+            product[PRODUCT_ADDITIONAL_PROMO] = offer;
+
+            const currentPrice = productData.find('.content_price .product-price').text().trim();
+            // Special Offer
+            if (offer.includes("BUY")) {
+                product[PRODUCT_ORIGINAL_PRICE] = currentPrice;
+            } else {
+                product[PRODUCT_DISCOUNTED_PRICE] = currentPrice;
+
+                const originalPrice = productData.find('.content_price .product-price').attr('data-price');
+                product[PRODUCT_ORIGINAL_PRICE] = originalPrice;
+            }
+
+            product[PRODUCT_PROMO_EXPIRY] = "";
+
+            productList.push(product);
+            console.log(product)
         }
     }
 
@@ -275,6 +325,7 @@ module.exports.getPromo = getPromo;
 module.exports.getNTUCProduct = getNTUCProduct;
 module.exports.getColdStorageProduct = getColdStorageProduct;
 module.exports.getShengSiongProduct = getShengSiongProduct;
+module.exports.getGiantProduct = getGiantProduct;
 module.exports.resultKey = {
     PRODUCT_ADDITIONAL_PROMO,
     PRODUCT_DISCOUNTED_PRICE,
