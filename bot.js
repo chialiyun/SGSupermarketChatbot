@@ -294,18 +294,19 @@ class SGSuperMartBot {
 
     async sendPromo(turnContext, supermarket) {
         let response = await getPromo();
-        // console.log(response); //for debugging
         let cardList = [];
         let url;
         let imgLink;
         let title;
         let store;
+        // console.log(response); //for debugging
         response.forEach(data => {
             store = data.store;
             if (store.includes(supermarket)) {
                 title = data.title;
                 imgLink = data.imgLink;
-                if (data.pdfLink !== "null") {
+
+                if (data.pdfLink !== null) {
                     url = data.pdfLink;
                 }
                 else {
