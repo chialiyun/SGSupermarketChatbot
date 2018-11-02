@@ -154,23 +154,26 @@ class SGSuperMartBot {
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
 
                                 await turnContext.sendActivity({
-                                    "facebook": {
-                                        "attachment": {
-                                            "type": "template",
-                                            "payload": {
-                                                "template_type": "button",
-                                                "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
-                                                "buttons": [
-                                                    {
-                                                        "type": "web_url",
-                                                        "url": 'https://stackoverflow.com/',
-                                                        "title": "Mannual Help"
-                                                    },
-                                                    {
-                                                        "type": "postback",
-                                                        "title": "FAQ",
-                                                        "payload": "FAQ_SELECTED_BY_USER"
-                                                    }]
+                                    "type": "message",
+                                    "source_event": {
+                                        "facebook": {
+                                            "attachment": {
+                                                "type": "template",
+                                                "payload": {
+                                                    "template_type": "button",
+                                                    "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
+                                                    "buttons": [
+                                                        {
+                                                            "type": "web_url",
+                                                            "url": 'https://stackoverflow.com/',
+                                                            "title": "Mannual Help"
+                                                        },
+                                                        {
+                                                            "type": "postback",
+                                                            "title": "FAQ",
+                                                            "payload": "FAQ_SELECTED_BY_USER"
+                                                        }]
+                                                }
                                             }
                                         }
                                     }
