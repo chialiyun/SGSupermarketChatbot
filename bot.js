@@ -387,6 +387,7 @@ class SGSuperMartBot {
 
 
         if (turnContext.activity.channelId === 'facebook') {
+            await turnContext.sendActivity("There are " + cardList.length + " promotion from " + supermarket)
             await turnContext.sendActivity({
                 "channelData": {
                     "attachment": {
