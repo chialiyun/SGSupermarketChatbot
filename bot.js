@@ -1,6 +1,7 @@
 const emoji = require('node-emoji')
 const { ActivityTypes,
     CardFactory,
+    MessageFactory,
     ConversationState,
     TurnContext } = require('botbuilder');
 const { ChoicePrompt,
@@ -148,9 +149,11 @@ class SGSuperMartBot {
                                     reprompt: 'That was not a valid choice, please select a Supermarket or number from 1 to 5.',
                                     choices: this.getChoices()
                                 };
-
                                 // Prompt the user with the configured PromptOptions.
-                                await dc.prompt(PROMPT_ID, promptOptions);
+                                await dc.prompt(PROMPT_ID, promptOptions, {
+                                    listStyle: ListStyle.button
+                                });
+                                // await this.sendSuggestedActions(turnContext);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
                                 break;
                             case GETSUPERMARKET_INTENT:
@@ -260,6 +263,11 @@ class SGSuperMartBot {
         //     return true; // this is an interruption
         // }
         return false; // this is not an interruption
+    }
+
+    async sendSuggestedActions(turnContext) {
+        var reply = MessageFactory.suggestedActions(['Red', 'Yellow', 'Blue'], 'What is the best color?');
+        await turnContext.sendActivity(reply);
     }
 
     /**
