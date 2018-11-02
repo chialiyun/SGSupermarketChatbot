@@ -169,8 +169,7 @@ class SGSuperMartBot {
                                                             "title": "Mannual Help"
                                                         },
                                                         {
-                                                            "type": "element_share",
-                                                            "title": "SHARE"
+                                                            "type": "element_share"
                                                         }]
                                                 }
                                             }
