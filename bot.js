@@ -332,6 +332,35 @@ class SGSuperMartBot {
                                 "type": "web_url",
                                 "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
                                 "title": "<BUTTON_TITLE>"
+                            },
+                            {
+                                "type": "element_share",
+                                "share_contents": {
+                                    "attachment": {
+                                        "type": "template",
+                                        "payload": {
+                                            "template_type": "generic",
+                                            "elements": [
+                                                {
+                                                    "title": "<TEMPLATE_TITLE>",
+                                                    "subtitle": "<TEMPLATE_SUBTITLE>",
+                                                    "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                                    "default_action": {
+                                                        "type": "web_url",
+                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
+                                                    },
+                                                    "buttons": [
+                                                        {
+                                                            "type": "web_url",
+                                                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                                            "title": "<BUTTON_TITLE>"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
                             }
                         ]
                     }
@@ -359,155 +388,19 @@ class SGSuperMartBot {
 
         if (turnContext.activity.channelId === 'facebook') {
 
+
             await turnContext.sendActivity({
                 "channelData": {
                     "attachment": {
                         "type": "template",
                         "payload": {
                             "template_type": "generic",
-                            "elements": [
-                                {
-                                    "title": "<TEMPLATE_TITLE>",
-                                    "subtitle": "<TEMPLATE_SUBTITLE>",
-                                    "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                    "default_action": {
-                                        "type": "web_url",
-                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-                                    },
-                                    "buttons": [
-                                        {
-                                            "type": "web_url",
-                                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                            "title": "<BUTTON_TITLE>"
-                                        },
-                                        {
-                                            "type": "element_share",
-                                            "share_contents": {
-                                                "attachment": {
-                                                    "type": "template",
-                                                    "payload": {
-                                                        "template_type": "generic",
-                                                        "elements": [
-                                                            {
-                                                                "title": "<TEMPLATE_TITLE>",
-                                                                "subtitle": "<TEMPLATE_SUBTITLE>",
-                                                                "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                "default_action": {
-                                                                    "type": "web_url",
-                                                                    "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-                                                                },
-                                                                "buttons": [
-                                                                    {
-                                                                        "type": "web_url",
-                                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                        "title": "<BUTTON_TITLE>"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "<TEMPLATE_TITLE>",
-                                    "subtitle": "<TEMPLATE_SUBTITLE>",
-                                    "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                    "default_action": {
-                                        "type": "web_url",
-                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-                                    },
-                                    "buttons": [
-                                        {
-                                            "type": "web_url",
-                                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                            "title": "<BUTTON_TITLE>"
-                                        },
-                                        {
-                                            "type": "element_share",
-                                            "share_contents": {
-                                                "attachment": {
-                                                    "type": "template",
-                                                    "payload": {
-                                                        "template_type": "generic",
-                                                        "elements": [
-                                                            {
-                                                                "title": "<TEMPLATE_TITLE>",
-                                                                "subtitle": "<TEMPLATE_SUBTITLE>",
-                                                                "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                "default_action": {
-                                                                    "type": "web_url",
-                                                                    "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-                                                                },
-                                                                "buttons": [
-                                                                    {
-                                                                        "type": "web_url",
-                                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                        "title": "<BUTTON_TITLE>"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    ]
-                                }
+                            "elements": [promoCard
                             ]
                         }
                     }
                 }
             });
-
-            // await turnContext.sendActivity({
-            //     "channelData": {
-            //         "attachment": {
-            //             "type": "template",
-            //             "payload": {
-            //                 "template_type": "button",
-            //                 "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
-            //                 "buttons": [
-            //                     {
-            //                         "type": "web_url",
-            //                         "url": 'https://stackoverflow.com/',
-            //                         "title": "Mannual Help"
-            //                     },
-            //                     {
-            //                         "type": "element_share",
-            //                         "share_contents": {
-            //                             "attachment": {
-            //                                 "type": "template",
-            //                                 "payload": {
-            //                                     "template_type": "generic",
-            //                                     "elements": [
-            //                                         {
-            //                                             "title": "<TEMPLATE_TITLE>",
-            //                                             "subtitle": "<TEMPLATE_SUBTITLE>",
-            //                                             "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-            //                                             "default_action": {
-            //                                                 "type": "web_url",
-            //                                                 "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-            //                                             },
-            //                                             "buttons": [
-            //                                                 {
-            //                                                     "type": "web_url",
-            //                                                     "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-            //                                                     "title": "<BUTTON_TITLE>"
-            //                                                 }
-            //                                             ]
-            //                                         }
-            //                                     ]
-            //                                 }
-            //                             }
-            //                         }
-            //                     }]
-            //             }
-            //         }
-            //     }
-            // });
         } else {
             await turnContext.sendActivity({
                 "type": "message",
