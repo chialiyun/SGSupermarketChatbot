@@ -140,7 +140,7 @@ class SGSuperMartBot {
                             case GREETING_INTENT:
                                 await turnContext.sendActivity('Hello ' + emoji.get(':wave:') + 
                                 ' Wanna save some moeny ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
-                                'Comme on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
+                                'Come on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
                                 // Create the PromptOptions which contain the prompt and reprompt messages.
                                 // PromptOptions also contains the list of choices available to the user.
                                 const promptOptions = {

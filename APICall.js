@@ -13,7 +13,7 @@ const PRODUCT_STORE = "store";
 // Websites
 const fairpriceSearchURL = "https://www.fairprice.com.sg/searchterm/";
 const coldStorageSearchURL = "https://coldstorage.com.sg/search?q=";
-const coldStorageURL = "https://coldstorage.com.sg/";
+const coldStorageURL = "https://coldstorage.com.sg";
 const shengSiongSearchURL = "https://allforyou.sg/search?q=";
 const giantSearchURL = "https://giantonline.com.sg/search?q=";
 const giantProductURL = "https://giantonline.com.sg/product";
@@ -114,7 +114,11 @@ async function getColdStorageProduct(name) {
         const offer = productData.find('.product-discount-label').text();
 
         const productURL = productData.find('.product-link').attr('href');
-        const productImgURL = productData.find('.img img').attr('src');
+        let productImgURL = productData.find('.img img').attr('src');
+
+        if (productImgURL.indexOf("http") < 0)
+            productImgURL = coldStorageURL + productImgURL
+
         product[PRODUCT_URL] = coldStorageURL + productURL;
         product[PRODUCT_IMAGE_URL] = productImgURL;
 
