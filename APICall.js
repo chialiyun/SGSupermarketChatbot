@@ -16,7 +16,8 @@ const coldStorageSearchURL = "https://coldstorage.com.sg/search?q=";
 const coldStorageURL = "https://coldstorage.com.sg/";
 const shengSiongSearchURL = "https://allforyou.sg/search?q=";
 const giantSearchURL = "https://giantonline.com.sg/search?q=";
-const giantURL = "https://giantonline.com.sg/product";
+const giantProductURL = "https://giantonline.com.sg/product";
+const giantURL = "https://giantonline.com.sg";
 
 async function getPromo() {
     const url = "https://khubite.000webhostapp.com/app/sg_supermarket/data_v1.json";
@@ -186,8 +187,6 @@ async function getShengSiongProduct(name) {
     return productList;
 }
 
-
-getShengSiongProduct('milo');
 async function getGiantProduct(name) {
     const productList = [];
     const url = giantSearchURL + name;
@@ -214,7 +213,7 @@ async function getGiantProduct(name) {
         if (productImgURL.indexOf("http") < 0)
             productImgURL = giantURL + productImgURL
 
-        product[PRODUCT_URL] = giantURL + productURL;
+        product[PRODUCT_URL] = giantProductURL + productURL;
         product[PRODUCT_IMAGE_URL] = productImgURL;
 
         // If there is offer
