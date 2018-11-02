@@ -25,7 +25,7 @@ async function getPromo() {
     const jsonData = await response.json();
 
     if (jsonData && jsonData.length > 0) {
-        console.log("json " + jsonData)
+        // console.log("json " + jsonData)
         return jsonData;
     } else {
         return "Error";
@@ -164,14 +164,12 @@ async function getShengSiongProduct(name) {
         const productURL = productData.find('.product-link').attr('href');
         // var productImgURL = productData.find('#productImageThumb').attr('style');
         var productImgURL = hiddenData.attr('data-imgurl');
-        product[PRODUCT_URL] = shengSiongSearchURL + productName;
+        product[PRODUCT_URL] = encodeURI(shengSiongSearchURL + productName);    //  Encode the string to URI
         product[PRODUCT_IMAGE_URL] = productImgURL;
 
         const hasOffer = hiddenData.attr('data-hasoffers');
         // If there is offer
         if (hasOffer === "True") {
-            console.log(productName)
-
             const offerName = hiddenData.attr('data-offername');
             product[PRODUCT_ADDITIONAL_PROMO] = offerName;
             const currentPrice = hiddenData.attr('data-price');
@@ -189,7 +187,7 @@ async function getShengSiongProduct(name) {
 }
 
 
-getGiantProduct('milo');
+getShengSiongProduct('milo');
 async function getGiantProduct(name) {
     const productList = [];
     const url = giantSearchURL + name;
@@ -237,7 +235,6 @@ async function getGiantProduct(name) {
             product[PRODUCT_PROMO_EXPIRY] = "";
 
             productList.push(product);
-            console.log(product)
         }
     }
 

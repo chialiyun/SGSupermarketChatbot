@@ -1,3 +1,4 @@
+const emoji = require('node-emoji')
 const { ActivityTypes,
     CardFactory,
     ConversationState,
@@ -20,7 +21,7 @@ const GREETING_INTENT = 'Greeting';
 const GETSUPERMARKET_INTENT = 'GetSupermarket';
 const GETPROMOTION_INTENT = 'GetPromotions';
 const CANCEL_INTENT = 'Cancel';
-// const HELP_INTENT = 'Help';
+const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
 const PROMPT_ID = 'cardPrompt';
 
@@ -33,7 +34,6 @@ const RESULT_VALUE = "VALUE";
 const FAIRPRICE = "Fairprice";
 const GIANT = "Giant";
 const COLDSTORAGE = "Cold Storage";
-const PRIME = "Prime";
 const SHENG_SIONG = "Sheng Siong";
 
 const FAIRPRICE_ENTITY = ['Fairprice'];
@@ -138,7 +138,10 @@ class SGSuperMartBot {
                         // Determine what we should do based on the top intent from LUIS.
                         switch (topIntent) {
                             case GREETING_INTENT:
-                                await turnContext.sendActivity('Nice to meet you!');
+                                await this.test(turnContext)
+                                await turnContext.sendActivity('Hello ' + emoji.get(':wave:') + 
+                                ' Wanna save some moeny ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
+                                'Comme on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
                                 // Create the PromptOptions which contain the prompt and reprompt messages.
                                 // PromptOptions also contains the list of choices available to the user.
                                 const promptOptions = {
@@ -168,10 +171,8 @@ class SGSuperMartBot {
                                 if (result[RESULT_TYPE] == STORE_TYPE)
                                     // Send supermarket promotions
                                     await this.sendPromo(turnContext, result[RESULT_VALUE])
-                                else if (result[RESULT_TYPE] == PRODUCT_TYPE) {// To send product list
-                                    console.log("prouct");
-                                    // var response = await getNTUCProduct(result);
-                                    // console.log("resulttttt-" + response)
+                                else if (result[RESULT_TYPE] == PRODUCT_TYPE) {
+                                    // To send product list
                                     await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + FAIRPRICE + '...');
                                     await this.sendProductPromo(turnContext, FAIRPRICE, result[RESULT_VALUE]);
                                     await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + COLDSTORAGE + '...');
@@ -181,6 +182,12 @@ class SGSuperMartBot {
                                     await turnContext.sendActivity('We are getting promotions for ' + result[RESULT_VALUE] + ' from ' + GIANT + '...');
                                     await this.sendProductPromo(turnContext, GIANT, result[RESULT_VALUE]);
                                 }
+                                break;
+                            case HELP_INTENT:
+                                await turnContext.sendActivity('I can show you the offer for products in SG Supermarkets! ' + emoji.get(':smile:') +
+                                '\nSimply send me a product name e.g. promo for milo, promo for cake' + 
+                                "\nIf you want to see the supermarket's promotional advertisements, send me the supermarket's name e.g. promo for NTUC" + 
+                                "\n\n Try now! Send me 'promo for milo'");
                                 break;
                             case NONE_INTENT:
                             default:
@@ -305,7 +312,6 @@ class SGSuperMartBot {
                 else {
                     url = imgLink;
                 }
-                // console.log(imgLink);
                 let promoCard = CardFactory.heroCard(
                     title,
                     CardFactory.images([imgLink]),
@@ -344,10 +350,10 @@ class SGSuperMartBot {
             case COLDSTORAGE:
                 response = await getColdStorageProduct(product);
                 break;
-            case SHENG_SIONG: 
+            case SHENG_SIONG:
                 response = await getShengSiongProduct(product);
                 break;
-            case GIANT: 
+            case GIANT:
                 response = await getGiantProduct(product);
                 break;
         }
@@ -355,7 +361,6 @@ class SGSuperMartBot {
         let cardList = [];
 
         response.forEach(data => {
-            // console.log(imgLink);
             var text = "";
 
             if (data[resultKey.PRODUCT_ORIGINAL_PRICE] !== "")
@@ -377,21 +382,24 @@ class SGSuperMartBot {
                     {
                         type: 'openUrl',
                         title: 'View details',
-                        value: data[resultKey.PRODUCT_URL]
+                        value: 'javascript: window.location=“https://allforyou.sg/search?q=Nestle%20Milo%20Actigen-E";'
                     }
                 ]),
 
             );
+            // value: data[resultKey.PRODUCT_URL],
             cardList.push(promoCard);
         });
 
-
-        await turnContext.sendActivity({
-            "type": "message",
-            "text": "There are " + cardList.length + " " + product + " promotion from " + store,
-            "attachmentLayout": "carousel",
-            "attachments": cardList
-        })
+        if (cardList.length == 0)
+            await turnContext.sendActivity("Sorry, we do not see any promotions for " + product + " in " + store + ". " + emoji.get(':disappointed:'))
+        else
+            await turnContext.sendActivity({
+                "type": "message",
+                "text": "There are " + cardList.length + " " + product + " promotion from " + store,
+                "attachmentLayout": "carousel",
+                "attachments": cardList
+            })
     }
 
     async getPromoEntity(luisResult, context) {
