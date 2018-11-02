@@ -139,9 +139,9 @@ class SGSuperMartBot {
                         // Determine what we should do based on the top intent from LUIS.
                         switch (topIntent) {
                             case GREETING_INTENT:
-                                await turnContext.sendActivity('Hello ' + emoji.get(':wave:') + 
-                                ' Wanna save some money ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
-                                'Come on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
+                                await turnContext.sendActivity('Hello ' + emoji.get(':wave:') +
+                                    ' Wanna save some money ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' +
+                                    'Come on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
                                 // Create the PromptOptions which contain the prompt and reprompt messages.
                                 // PromptOptions also contains the list of choices available to the user.
                                 const promptOptions = {
@@ -155,27 +155,28 @@ class SGSuperMartBot {
 
                                 await turnContext.sendActivity(turnContext.activity.channelId)
                                 if (turnContext.activity.channelId === 'facebook') {
-                                    let msg = turnContext.activity.channelData = {
-                                        "attachment": {
-                                            "type": "template",
-                                            "payload": {
-                                                "template_type": "button",
-                                                "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
-                                                "buttons": [
-                                                    {
-                                                        "type": "web_url",
-                                                        "url": 'https://stackoverflow.com/',
-                                                        "title": "Mannual Help"
-                                                    },
-                                                    {
-                                                        "type": "postback",
-                                                        "title": "FAQ",
-                                                        "payload": "FAQ_SELECTED_BY_USER"
-                                                    }]
+                                    await turnContext.sendActivity({
+                                        "channelData": {
+                                            "attachment": {
+                                                "type": "template",
+                                                "payload": {
+                                                    "template_type": "button",
+                                                    "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
+                                                    "buttons": [
+                                                        {
+                                                            "type": "web_url",
+                                                            "url": 'https://stackoverflow.com/',
+                                                            "title": "Mannual Help"
+                                                        },
+                                                        {
+                                                            "type": "postback",
+                                                            "title": "FAQ",
+                                                            "payload": "FAQ_SELECTED_BY_USER"
+                                                        }]
+                                                }
                                             }
-                                        }   
-                                    }
-                                    await turnContext.sendActivity(msg);
+                                        }
+                                    });
                                 }
                                 break;
                             case GETSUPERMARKET_INTENT:
@@ -209,9 +210,9 @@ class SGSuperMartBot {
                                 break;
                             case HELP_INTENT:
                                 await turnContext.sendActivity('I can show you the offer for products in SG Supermarkets! ' + emoji.get(':smile:') +
-                                '\nSimply send me a product name e.g. promo for milo, promo for cake' + 
-                                "\nIf you want to see the supermarket's promotional advertisements, send me the supermarket's name e.g. promo for NTUC" + 
-                                "\n\n Try now! Send me 'promo for milo'");
+                                    '\nSimply send me a product name e.g. promo for milo, promo for cake' +
+                                    "\nIf you want to see the supermarket's promotional advertisements, send me the supermarket's name e.g. promo for NTUC" +
+                                    "\n\n Try now! Send me 'promo for milo'");
                                 break;
                             case NONE_INTENT:
                             default:
