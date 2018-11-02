@@ -395,8 +395,7 @@ class SGSuperMartBot {
                         "type": "template",
                         "payload": {
                             "template_type": "generic",
-                            "elements": [promoCard
-                            ]
+                            "elements": cardList
                         }
                     }
                 }
