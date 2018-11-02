@@ -169,9 +169,8 @@ class SGSuperMartBot {
                                                             "title": "Mannual Help"
                                                         },
                                                         {
-                                                            "type": "postback",
-                                                            "title": "FAQ",
-                                                            "payload": "FAQ_SELECTED_BY_USER"
+                                                            "type": "element_share",
+                                                            "title": "SHARE"
                                                         }]
                                                 }
                                             }
