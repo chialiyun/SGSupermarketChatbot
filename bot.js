@@ -153,31 +153,7 @@ class SGSuperMartBot {
                                 // await dc.prompt(PROMPT_ID, promptOptions);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
 
-                                await turnContext.sendActivity({
-                                    "type": "message",
-                                    "source_event": {
-                                        "facebook": {
-                                            "attachment": {
-                                                "type": "template",
-                                                "payload": {
-                                                    "template_type": "button",
-                                                    "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
-                                                    "buttons": [
-                                                        {
-                                                            "type": "web_url",
-                                                            "url": 'https://stackoverflow.com/',
-                                                            "title": "Mannual Help"
-                                                        },
-                                                        {
-                                                            "type": "postback",
-                                                            "title": "FAQ",
-                                                            "payload": "FAQ_SELECTED_BY_USER"
-                                                        }]
-                                                }
-                                            }
-                                        }
-                                    }
-                                })
+                                await turnContext.sendActivity(turnContext.activity.channelId)
                                 break;
                             case GETSUPERMARKET_INTENT:
                                 var supermarket = await this.getEntity(results, turnContext);
