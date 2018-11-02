@@ -154,55 +154,7 @@ class SGSuperMartBot {
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
 
                                 await turnContext.sendActivity(turnContext.activity.channelId)
-                                if (turnContext.activity.channelId === 'facebook') {
-                                    await turnContext.sendActivity({
-                                        "channelData": {
-                                            "attachment": {
-                                                "type": "template",
-                                                "payload": {
-                                                    "template_type": "button",
-                                                    "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
-                                                    "buttons": [
-                                                        {
-                                                            "type": "web_url",
-                                                            "url": 'https://stackoverflow.com/',
-                                                            "title": "Mannual Help"
-                                                        },
-                                                        {
-                                                            "type": "element_share",
-                                                            "share_contents": {
-                                                                "attachment": {
-                                                                    "type": "template",
-                                                                    "payload": {
-                                                                        "template_type": "generic",
-                                                                        "elements": [
-                                                                            {
-                                                                                "title": "<TEMPLATE_TITLE>",
-                                                                                "subtitle": "<TEMPLATE_SUBTITLE>",
-                                                                                "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                                "default_action": {
-                                                                                    "type": "web_url",
-                                                                                    "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
-                                                                                },
-                                                                                "buttons": [
-                                                                                    {
-                                                                                        "type": "web_url",
-                                                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                                                        "title": "<BUTTON_TITLE>"
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                }
-                                                            }
 
-                                                        }]
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
                                 break;
                             case GETSUPERMARKET_INTENT:
                                 var supermarket = await this.getEntity(results, turnContext);
@@ -363,32 +315,103 @@ class SGSuperMartBot {
                 else {
                     url = imgLink;
                 }
-                let promoCard = CardFactory.heroCard(
-                    title,
-                    CardFactory.images([imgLink]),
-                    CardFactory.actions([
-                        {
-                            type: 'openUrl',
-                            title: 'View',
-                            value: url
+
+                let promoCard;
+
+                if (turnContext.activity.channelId === 'facebook') {
+                    promoCard = {
+                        "title": "<TEMPLATE_TITLE>",
+                        "subtitle": "<TEMPLATE_SUBTITLE>",
+                        "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
                         },
-                        {
-                            type: 'showImage',
-                            title: 'Share',
-                            value: url
-                        }
-                    ])
-                );
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                "title": "<BUTTON_TITLE>"
+                            }
+                        ]
+                    }
+                } else
+                    promoCard = CardFactory.heroCard(
+                        title,
+                        CardFactory.images([imgLink]),
+                        CardFactory.actions([
+                            {
+                                type: 'openUrl',
+                                title: 'View',
+                                value: url
+                            },
+                            {
+                                type: 'showImage',
+                                title: 'Share',
+                                value: url
+                            }
+                        ])
+                    );
                 cardList.push(promoCard);
             }
         });
 
-        await turnContext.sendActivity({
-            "type": "message",
-            "text": "There are " + cardList.length + " promotion from " + supermarket,
-            "attachmentLayout": "carousel",
-            "attachments": cardList
-        })
+
+        if (turnContext.activity.channelId === 'facebook') {
+            // await turnContext.sendActivity({
+            //     "channelData": {
+            //         "attachment": {
+            //             "type": "template",
+            //             "payload": {
+            //                 "template_type": "button",
+            //                 "text": "You can either hit 'FAQ' to get the help, or head to the Mannual Help for getting help.",
+            //                 "buttons": [
+            //                     {
+            //                         "type": "web_url",
+            //                         "url": 'https://stackoverflow.com/',
+            //                         "title": "Mannual Help"
+            //                     },
+            //                     {
+            //                         "type": "element_share",
+            //                         "share_contents": {
+            //                             "attachment": {
+            //                                 "type": "template",
+            //                                 "payload": {
+            //                                     "template_type": "generic",
+            //                                     "elements": [
+            //                                         {
+            //                                             "title": "<TEMPLATE_TITLE>",
+            //                                             "subtitle": "<TEMPLATE_SUBTITLE>",
+            //                                             "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+            //                                             "default_action": {
+            //                                                 "type": "web_url",
+            //                                                 "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
+            //                                             },
+            //                                             "buttons": [
+            //                                                 {
+            //                                                     "type": "web_url",
+            //                                                     "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+            //                                                     "title": "<BUTTON_TITLE>"
+            //                                                 }
+            //                                             ]
+            //                                         }
+            //                                     ]
+            //                                 }
+            //                             }
+            //                         }
+            //                     }]
+            //             }
+            //         }
+            //     }
+            // });
+        } else {
+            await turnContext.sendActivity({
+                "type": "message",
+                "text": "There are " + cardList.length + " promotion from " + supermarket,
+                "attachmentLayout": "carousel",
+                "attachments": cardList
+            })
+        }
     }
 
     async sendProductPromo(turnContext, store, product) {
