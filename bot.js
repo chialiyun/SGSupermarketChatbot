@@ -140,7 +140,7 @@ class SGSuperMartBot {
                         switch (topIntent) {
                             case GREETING_INTENT:
                                 await turnContext.sendActivity('Hello ' + emoji.get(':wave:') + 
-                                ' Wanna save some moeny ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
+                                ' Wanna save some money ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
                                 'Come on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
                                 // Create the PromptOptions which contain the prompt and reprompt messages.
                                 // PromptOptions also contains the list of choices available to the user.
@@ -150,10 +150,7 @@ class SGSuperMartBot {
                                     choices: this.getChoices()
                                 };
                                 // Prompt the user with the configured PromptOptions.
-                                await dc.prompt(PROMPT_ID, promptOptions, {
-                                    listStyle: ListStyle.button
-                                });
-                                // await this.sendSuggestedActions(turnContext);
+                                await dc.prompt(PROMPT_ID, promptOptions);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
                                 break;
                             case GETSUPERMARKET_INTENT:
@@ -263,11 +260,6 @@ class SGSuperMartBot {
         //     return true; // this is an interruption
         // }
         return false; // this is not an interruption
-    }
-
-    async sendSuggestedActions(turnContext) {
-        var reply = MessageFactory.suggestedActions(['Red', 'Yellow', 'Blue'], 'What is the best color?');
-        await turnContext.sendActivity(reply);
     }
 
     /**
