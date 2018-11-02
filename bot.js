@@ -412,6 +412,12 @@ class SGSuperMartBot {
                 "attachments": cardList
             })
         }
+        await turnContext.sendActivity({
+            "type": "message",
+            "text": "There are " + cardList.length + " promotion from " + supermarket,
+            "attachmentLayout": "carousel",
+            "attachments": cardList
+        })
     }
 
     async sendProductPromo(turnContext, store, product) {
