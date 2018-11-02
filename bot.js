@@ -150,7 +150,7 @@ class SGSuperMartBot {
                                     choices: this.getChoices()
                                 };
                                 // Prompt the user with the configured PromptOptions.
-                                await dc.prompt(PROMPT_ID, promptOptions);
+                                // await dc.prompt(PROMPT_ID, promptOptions);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
 
                                 await turnContext.sendActivity({
