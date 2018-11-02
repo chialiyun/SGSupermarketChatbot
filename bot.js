@@ -320,18 +320,18 @@ class SGSuperMartBot {
 
                 if (turnContext.activity.channelId === 'facebook') {
                     promoCard = {
-                        "title": "<TEMPLATE_TITLE>",
-                        "subtitle": "<TEMPLATE_SUBTITLE>",
-                        "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                        "title": title,
+                        "subtitle": "",
+                        "image_url": imgLink,
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
+                            "url": url
                         },
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                "title": "<BUTTON_TITLE>"
+                                "url": url,
+                                "title": "View Details"
                             },
                             {
                                 "type": "element_share",
@@ -342,18 +342,18 @@ class SGSuperMartBot {
                                             "template_type": "generic",
                                             "elements": [
                                                 {
-                                                    "title": "<TEMPLATE_TITLE>",
-                                                    "subtitle": "<TEMPLATE_SUBTITLE>",
-                                                    "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                                    "title": title,
+                                                    "subtitle": "",
+                                                    "image_url": imgLink,
                                                     "default_action": {
                                                         "type": "web_url",
-                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
+                                                        "url": url
                                                     },
                                                     "buttons": [
                                                         {
                                                             "type": "web_url",
-                                                            "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                                                            "title": "<BUTTON_TITLE>"
+                                                            "url": url,
+                                                            "title": "View Details"
                                                         }
                                                     ]
                                                 }
@@ -371,7 +371,7 @@ class SGSuperMartBot {
                         CardFactory.actions([
                             {
                                 type: 'openUrl',
-                                title: 'View',
+                                title: 'View Details',
                                 value: url
                             },
                             {
@@ -387,8 +387,6 @@ class SGSuperMartBot {
 
 
         if (turnContext.activity.channelId === 'facebook') {
-
-
             await turnContext.sendActivity({
                 "channelData": {
                     "attachment": {
