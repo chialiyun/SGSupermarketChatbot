@@ -138,7 +138,6 @@ class SGSuperMartBot {
                         // Determine what we should do based on the top intent from LUIS.
                         switch (topIntent) {
                             case GREETING_INTENT:
-                                await this.test(turnContext)
                                 await turnContext.sendActivity('Hello ' + emoji.get(':wave:') + 
                                 ' Wanna save some moeny ' + emoji.get(':moneybag:') + ' and find out the promotions for the supermarkets in Singapore?\n' + 
                                 'Comme on and send a name of a product and I will find out all the offers!! ' + emoji.get(':wink:'));
