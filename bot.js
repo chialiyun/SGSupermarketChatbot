@@ -381,12 +381,11 @@ class SGSuperMartBot {
                     {
                         type: 'openUrl',
                         title: 'View details',
-                        value: 'javascript: window.location=“https://allforyou.sg/search?q=Nestle%20Milo%20Actigen-E";'
+                        value: data[resultKey.PRODUCT_URL],
                     }
                 ]),
 
             );
-            // value: data[resultKey.PRODUCT_URL],
             cardList.push(promoCard);
         });
 
