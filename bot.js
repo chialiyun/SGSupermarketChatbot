@@ -167,6 +167,36 @@ class SGSuperMartBot {
                                                             "type": "web_url",
                                                             "url": 'https://stackoverflow.com/',
                                                             "title": "Mannual Help"
+                                                        },
+                                                        {
+                                                            "type": "element_share",
+                                                            "share_contents": {
+                                                                "attachment": {
+                                                                    "type": "template",
+                                                                    "payload": {
+                                                                        "template_type": "generic",
+                                                                        "elements": [
+                                                                            {
+                                                                                "title": "<TEMPLATE_TITLE>",
+                                                                                "subtitle": "<TEMPLATE_SUBTITLE>",
+                                                                                "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                                                                "default_action": {
+                                                                                    "type": "web_url",
+                                                                                    "url": "https://bot.peters-hats.com/img/hats/fez.jpg"
+                                                                                },
+                                                                                "buttons": [
+                                                                                    {
+                                                                                        "type": "web_url",
+                                                                                        "url": "https://bot.peters-hats.com/img/hats/fez.jpg",
+                                                                                        "title": "<BUTTON_TITLE>"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            }
+
                                                         }]
                                                 }
                                             }
