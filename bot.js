@@ -167,9 +167,6 @@ class SGSuperMartBot {
                                                             "type": "web_url",
                                                             "url": 'https://stackoverflow.com/',
                                                             "title": "Mannual Help"
-                                                        },
-                                                        {
-                                                            "type": "element_share"
                                                         }]
                                                 }
                                             }
