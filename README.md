@@ -7,9 +7,9 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more 
 ### Prerequisites:
 1. Install NodeJS (https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi)
 2. Install Visual Studio Code* (https://code.visualstudio.com/)
-3. Install git (https://git-scm.com/download/win)
+3. Install Git (https://git-scm.com/download/win)
 4. Install Bot Framework Emulator (https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe)
-5. Azure subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+5. Azure Subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 
 ## Deployment:
 ### Steps
