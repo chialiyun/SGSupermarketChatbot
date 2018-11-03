@@ -11,8 +11,8 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more 
 4. Install Bot Framework Emulator (https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe)
 5. Azure subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 
-### Deployment:
-#### Steps
+## Deployment:
+### Steps
 1. Create new project folder and change directory into it.
 ```
 mkdir getbot
@@ -62,8 +62,8 @@ cd getbot
  });
 ```
 5. Run node index.js to make sure the bot is working
-6. open bot framework emulator and create a bot config pointing to your localhost endpoint
-7. ensure the bot is working
+6. Open Bot Framework Emulator and create a bot config pointing to your localhost endpoint
+7. Ensure the bot is working
 
-### Built With
-* Bot Builder V4 JS
+## Built With
+* Microsoft Bot Builder SDK
