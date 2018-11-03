@@ -1,6 +1,9 @@
 # SG SuperMarket Bot
-## Description
 SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+See deployment for notes on how to deploy the project on a live system.
+See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more details.
 ### Prerequisites:
 1. Install NodeJS (https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi)
 2. Install Visual Studio Code* (https://code.visualstudio.com/)
@@ -8,7 +11,8 @@ SG Supermarket bot allow users to easily access SG Supermarket promotions throug
 4. Install Bot Framework Emulator (https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe)
 5. Azure subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 
-### Steps:
+### Deployment:
+#### Steps
 1. Create new project folder and change directory into it.
 ```
 mkdir getbot
@@ -60,3 +64,6 @@ cd getbot
 5. Run node index.js to make sure the bot is working
 6. open bot framework emulator and create a bot config pointing to your localhost endpoint
 7. ensure the bot is working
+
+### Built With
+* Bot Builder V4 JS
