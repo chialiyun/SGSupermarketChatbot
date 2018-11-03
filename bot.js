@@ -94,7 +94,7 @@ class SGSuperMartBot {
         const prompt = new ChoicePrompt('cardPrompt');
 
         // Set the choice rendering to list and then add it to the bot's DialogSet.
-        prompt.style = ListStyle.list;
+        prompt.style = ListStyle.buttons;
         this.dialogs.add(prompt);
     }
 
@@ -150,10 +150,8 @@ class SGSuperMartBot {
                                     choices: this.getChoices()
                                 };
                                 // Prompt the user with the configured PromptOptions.
-                                // await dc.prompt(PROMPT_ID, promptOptions);
+                                await dc.prompt(PROMPT_ID, promptOptions);
                                 // The bot parsed a valid response from user's prompt response and so it must respond.
-
-                                await turnContext.sendActivity(turnContext.activity.channelId)
 
                                 break;
                             case GETSUPERMARKET_INTENT:
