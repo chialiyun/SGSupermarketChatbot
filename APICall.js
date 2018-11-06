@@ -161,7 +161,7 @@ async function getShengSiongProduct(name) {
 
         const product = {};
 
-        const productName = productData.find('.prodname span').text();
+        const productName = productData.find('.prodname span').text().trim();
         product[PRODUCT_NAME] = productName;
 
         const hiddenData = productData.find('.prod-data');
@@ -169,7 +169,7 @@ async function getShengSiongProduct(name) {
         const productURL = productData.find('.product-link').attr('href');
         // var productImgURL = productData.find('#productImageThumb').attr('style');
         var productImgURL = hiddenData.attr('data-imgurl');
-        product[PRODUCT_URL] = encodeURIComponent(shengSiongSearchURL + productName);    //  Encode the string to URI
+        product[PRODUCT_URL] = encodeURI(shengSiongSearchURL + productName);    //  Encode the string to URI
         product[PRODUCT_IMAGE_URL] = productImgURL;
 
         const hasOffer = hiddenData.attr('data-hasoffers');
@@ -187,10 +187,10 @@ async function getShengSiongProduct(name) {
             productList.push(product);
         }
     }
-
     return productList;
 }
 
+getShengSiongProduct('milo')
 async function getGiantProduct(name) {
     const productList = [];
     const url = giantSearchURL + name;
