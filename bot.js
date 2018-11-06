@@ -465,7 +465,7 @@ class SGSuperMartBot {
             let promoCard;
             if (turnContext.activity.channelId === 'facebook') {
 
-                let title = "da";
+                let title = data[resultKey.PRODUCT_NAME];
                 let imgLink = "http://www.google.com"
                 let url = "http://www.google.com"
                 promoCard = {
