@@ -392,6 +392,7 @@ class SGSuperMartBot {
                 for (let i = 0; i < cardList.length / 10; i++) {
                     let count = i * 10;
                     let items = cardList.slice(count, size)
+                    await turnContext.sendActivity("heee" + items.length)
                     await turnContext.sendActivity({
                         "channelData": {
                             "attachment": {
