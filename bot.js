@@ -461,19 +461,68 @@ class SGSuperMartBot {
 
             console.log(text);
 
-            let promoCard = CardFactory.heroCard(
-                data[resultKey.PRODUCT_NAME],
-                text,
-                CardFactory.images([data[resultKey.PRODUCT_IMAGE_URL]]),
-                CardFactory.actions([
-                    {
-                        type: 'openUrl',
-                        title: 'View details',
-                        value: data[resultKey.PRODUCT_URL],
-                    }
-                ]),
 
-            );
+            if (turnContext.activity.channelId === 'facebook') {
+                promoCard = {
+                    "title": data[resultKey.PRODUCT_NAME],
+                    "subtitle": text,
+                    "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                    "default_action": {
+                        "type": "web_url",
+                        "url": [data[resultKey.PRODUCT_IMAGE_URL]]
+                    },
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                            "title": "View Details"
+                        },
+                        {
+                            "type": "element_share",
+                            "share_contents": {
+                                "attachment": {
+                                    "type": "template",
+                                    "payload": {
+                                        "template_type": "generic",
+                                        "elements": [
+                                            {
+                                                "title": data[resultKey.PRODUCT_NAME],
+                                                "subtitle": "",
+                                                "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                                                "default_action": {
+                                                    "type": "web_url",
+                                                    "url": [data[resultKey.PRODUCT_IMAGE_URL]]
+                                                },
+                                                "buttons": [
+                                                    {
+                                                        "type": "web_url",
+                                                        "url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                                                        "title": "View Details"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            } else
+                let promoCard = CardFactory.heroCard(
+                    data[resultKey.PRODUCT_NAME],
+                    text,
+                    CardFactory.images([data[resultKey.PRODUCT_IMAGE_URL]]),
+                    CardFactory.actions([
+                        {
+                            type: 'openUrl',
+                            title: 'View details',
+                            value: data[resultKey.PRODUCT_URL],
+                        }
+                    ]),
+
+                );
+
             cardList.push(promoCard);
         });
 
@@ -481,8 +530,8 @@ class SGSuperMartBot {
             await turnContext.sendActivity("Sorry, we do not see any promotions for " + product + " in " + store + ". " + emoji.get(':disappointed:'))
         else {
             if (turnContext.activity.channelId === 'facebook') {
-                await turnContext.sendActivity("There are " + cardList.length + " " + product + " promotion from " + store)
-    
+                await turnContext.sendActivity("There are " + cardList.length + " " + product + " promotions from " + store)
+
                 // Facebook's carousell card limitation
                 if (cardList.length > 10) {
                     let size = 10;
@@ -502,6 +551,7 @@ class SGSuperMartBot {
                         });
                     }
                 } else {
+                    await turnContext.sendActivity("There are ")
                     await turnContext.sendActivity({
                         "channelData": {
                             "attachment": {
@@ -524,7 +574,7 @@ class SGSuperMartBot {
             }
 
         }
-            
+
     }
 
     async getPromoEntity(luisResult, context) {
