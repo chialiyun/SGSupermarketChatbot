@@ -404,8 +404,18 @@ class SGSuperMartBot {
                         }
                     });
                 }
-
-                
+            } else {
+                await turnContext.sendActivity({
+                    "channelData": {
+                        "attachment": {
+                            "type": "template",
+                            "payload": {
+                                "template_type": "generic",
+                                "elements": cardList
+                            }
+                        }
+                    }
+                });
             }
         } else {
             await turnContext.sendActivity({
