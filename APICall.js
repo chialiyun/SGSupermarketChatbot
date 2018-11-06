@@ -190,7 +190,6 @@ async function getShengSiongProduct(name) {
     return productList;
 }
 
-getShengSiongProduct('milo')
 async function getGiantProduct(name) {
     const productList = [];
     const url = giantSearchURL + name;
