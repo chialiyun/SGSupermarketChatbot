@@ -467,6 +467,7 @@ class SGSuperMartBot {
 
                 let title = "da";
                 let imgLink = "http://www.google.com"
+                let url = "http://www.google.com"
                 promoCard = {
                     "title": title,
                     "subtitle": "",
