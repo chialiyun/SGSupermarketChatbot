@@ -462,6 +462,7 @@ class SGSuperMartBot {
             console.log(text);
 
 
+            let promoCard;
             if (turnContext.activity.channelId === 'facebook') {
                 promoCard = {
                     "title": data[resultKey.PRODUCT_NAME],
@@ -509,7 +510,7 @@ class SGSuperMartBot {
                     ]
                 }
             } else
-                let promoCard = CardFactory.heroCard(
+                promoCard = CardFactory.heroCard(
                     data[resultKey.PRODUCT_NAME],
                     text,
                     CardFactory.images([data[resultKey.PRODUCT_IMAGE_URL]]),
