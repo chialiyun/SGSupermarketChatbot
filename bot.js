@@ -387,12 +387,12 @@ class SGSuperMartBot {
         if (turnContext.activity.channelId === 'facebook') {
             await turnContext.sendActivity("There are " + cardList.length + " promotion from " + supermarket)
 
+            // Facebook's carousell card limitation
             if (cardList.length > 10) {
                 let size = 10;
                 for (let i = 0; i < cardList.length / 10; i++) {
                     let count = i * 10;
                     let items = cardList.slice(count, count + size)
-                    await turnContext.sendActivity("heee" + items.length)
                     await turnContext.sendActivity({
                         "channelData": {
                             "attachment": {
@@ -479,13 +479,52 @@ class SGSuperMartBot {
 
         if (cardList.length == 0)
             await turnContext.sendActivity("Sorry, we do not see any promotions for " + product + " in " + store + ". " + emoji.get(':disappointed:'))
-        else
-            await turnContext.sendActivity({
-                "type": "message",
-                "text": "There are " + cardList.length + " " + product + " promotion from " + store,
-                "attachmentLayout": "carousel",
-                "attachments": cardList
-            })
+        else {
+            if (turnContext.activity.channelId === 'facebook') {
+                await turnContext.sendActivity("There are " + cardList.length + " " + product + " promotion from " + store)
+    
+                // Facebook's carousell card limitation
+                if (cardList.length > 10) {
+                    let size = 10;
+                    for (let i = 0; i < cardList.length / 10; i++) {
+                        let count = i * 10;
+                        let items = cardList.slice(count, count + size)
+                        await turnContext.sendActivity({
+                            "channelData": {
+                                "attachment": {
+                                    "type": "template",
+                                    "payload": {
+                                        "template_type": "generic",
+                                        "elements": items
+                                    }
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    await turnContext.sendActivity({
+                        "channelData": {
+                            "attachment": {
+                                "type": "template",
+                                "payload": {
+                                    "template_type": "generic",
+                                    "elements": cardList
+                                }
+                            }
+                        }
+                    });
+                }
+            } else {
+                await turnContext.sendActivity({
+                    "type": "message",
+                    "text": "There are " + cardList.length + " " + product + " promotion from " + store,
+                    "attachmentLayout": "carousel",
+                    "attachments": cardList
+                })
+            }
+
+        }
+            
     }
 
     async getPromoEntity(luisResult, context) {
