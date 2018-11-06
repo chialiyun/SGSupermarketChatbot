@@ -470,12 +470,12 @@ class SGSuperMartBot {
                     "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
                     "default_action": {
                         "type": "web_url",
-                        "url": [data[resultKey.PRODUCT_IMAGE_URL]]
+                        "url": [data[resultKey.PRODUCT_URL]]
                     },
                     "buttons": [
                         {
                             "type": "web_url",
-                            "url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                            "url": [data[resultKey.PRODUCT_URL]],
                             "title": "View Details"
                         },
                         {
@@ -492,12 +492,12 @@ class SGSuperMartBot {
                                                 "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
                                                 "default_action": {
                                                     "type": "web_url",
-                                                    "url": [data[resultKey.PRODUCT_IMAGE_URL]]
+                                                    "url": [data[resultKey.PRODUCT_URL]]
                                                 },
                                                 "buttons": [
                                                     {
                                                         "type": "web_url",
-                                                        "url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                                                        "url": [data[resultKey.PRODUCT_URL]],
                                                         "title": "View Details"
                                                     }
                                                 ]
