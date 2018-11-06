@@ -464,18 +464,21 @@ class SGSuperMartBot {
 
             let promoCard;
             if (turnContext.activity.channelId === 'facebook') {
+
+                let title = "da";
+                let imgLink = "http://www.google.com"
                 promoCard = {
-                    "title": data[resultKey.PRODUCT_NAME],
-                    "subtitle": text,
-                    "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                    "title": title,
+                    "subtitle": "",
+                    "image_url": imgLink,
                     "default_action": {
                         "type": "web_url",
-                        "url": [data[resultKey.PRODUCT_URL]]
+                        "url": url
                     },
                     "buttons": [
                         {
                             "type": "web_url",
-                            "url": [data[resultKey.PRODUCT_URL]],
+                            "url": url,
                             "title": "View Details"
                         },
                         {
@@ -487,17 +490,17 @@ class SGSuperMartBot {
                                         "template_type": "generic",
                                         "elements": [
                                             {
-                                                "title": data[resultKey.PRODUCT_NAME],
+                                                "title": title,
                                                 "subtitle": "",
-                                                "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                                                "image_url": imgLink,
                                                 "default_action": {
                                                     "type": "web_url",
-                                                    "url": [data[resultKey.PRODUCT_URL]]
+                                                    "url": url
                                                 },
                                                 "buttons": [
                                                     {
                                                         "type": "web_url",
-                                                        "url": [data[resultKey.PRODUCT_URL]],
+                                                        "url": url,
                                                         "title": "View Details"
                                                     }
                                                 ]
@@ -509,6 +512,52 @@ class SGSuperMartBot {
                         }
                     ]
                 }
+
+                // promoCard = {
+                //     "title": data[resultKey.PRODUCT_NAME],
+                //     "subtitle": text,
+                //     "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                //     "default_action": {
+                //         "type": "web_url",
+                //         "url": [data[resultKey.PRODUCT_URL]]
+                //     },
+                //     "buttons": [
+                //         {
+                //             "type": "web_url",
+                //             "url": [data[resultKey.PRODUCT_URL]],
+                //             "title": "View Details"
+                //         },
+                //         {
+                //             "type": "element_share",
+                //             "share_contents": {
+                //                 "attachment": {
+                //                     "type": "template",
+                //                     "payload": {
+                //                         "template_type": "generic",
+                //                         "elements": [
+                //                             {
+                //                                 "title": data[resultKey.PRODUCT_NAME],
+                //                                 "subtitle": text,
+                //                                 "image_url": [data[resultKey.PRODUCT_IMAGE_URL]],
+                //                                 "default_action": {
+                //                                     "type": "web_url",
+                //                                     "url": [data[resultKey.PRODUCT_URL]]
+                //                                 },
+                //                                 "buttons": [
+                //                                     {
+                //                                         "type": "web_url",
+                //                                         "url": [data[resultKey.PRODUCT_URL]],
+                //                                         "title": "View Details"
+                //                                     }
+                //                                 ]
+                //                             }
+                //                         ]
+                //                     }
+                //                 }
+                //             }
+                //         }
+                //     ]
+                // }
             } else
                 promoCard = CardFactory.heroCard(
                     data[resultKey.PRODUCT_NAME],
