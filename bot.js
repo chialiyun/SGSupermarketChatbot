@@ -448,7 +448,7 @@ class SGSuperMartBot {
         let cardList = [];
 
         response.forEach(data => {
-            var text = "";
+            let text = "";
 
             if (data[resultKey.PRODUCT_ORIGINAL_PRICE] !== "")
                 text += "ORIGINAL PRICE IS " + data[resultKey.PRODUCT_ORIGINAL_PRICE];
@@ -470,7 +470,7 @@ class SGSuperMartBot {
                 let url = "http://www.google.com"
                 promoCard = {
                     "title": title,
-                    "subtitle": "",
+                    "subtitle": text,
                     "image_url": imgLink,
                     "default_action": {
                         "type": "web_url",
