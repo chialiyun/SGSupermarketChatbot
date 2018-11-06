@@ -521,7 +521,6 @@ class SGSuperMartBot {
                             value: data[resultKey.PRODUCT_URL],
                         }
                     ]),
-
                 );
 
             cardList.push(promoCard);
@@ -552,7 +551,6 @@ class SGSuperMartBot {
                         });
                     }
                 } else {
-                    await turnContext.sendActivity("There are ")
                     await turnContext.sendActivity({
                         "channelData": {
                             "attachment": {
