@@ -166,7 +166,6 @@ async function getShengSiongProduct(name) {
 
         const hiddenData = productData.find('.prod-data');
 
-        const productURL = productData.find('.product-link').attr('href');
         // var productImgURL = productData.find('#productImageThumb').attr('style');
         var productImgURL = hiddenData.attr('data-imgurl');
         product[PRODUCT_URL] = encodeURI(shengSiongSearchURL + productName);    //  Encode the string to URI
