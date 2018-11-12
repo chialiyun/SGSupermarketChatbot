@@ -1,9 +1,15 @@
 # SG SuperMarket Bot
 SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.
+![Banner](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Banner.png)
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system.
 See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more details.
+
+### Architecture Diagram
+![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Banner.png)
+
 ### Prerequisites:
 1. Install NodeJS (https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi)
 2. Install Visual Studio Code* (https://code.visualstudio.com/)
