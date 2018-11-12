@@ -8,7 +8,7 @@ See deployment for notes on how to deploy the project on a live system.
 See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more details.
 
 ### Architecture Diagram
-![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Banner.png)
+![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Architecture%20Diagram.png)
 
 ### Prerequisites:
 1. Install NodeJS (https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi)
