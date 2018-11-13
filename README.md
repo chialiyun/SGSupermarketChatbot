@@ -5,7 +5,7 @@ SG Supermarket bot allow users to easily access SG Supermarket promotions throug
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system.
-See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot.wiki.git) for more details.
+See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more details.
 
 ### Architecture Diagram
 ![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Architecture%20Diagram.png)
@@ -76,4 +76,5 @@ cd getbot
 
 ## License
 ![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
+
 SG Supermarket by Chia is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
