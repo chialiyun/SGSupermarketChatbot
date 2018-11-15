@@ -56,11 +56,15 @@ $ node index.js
 2. Create a new bot configuration
     Bot configuration is a file that keeps your settings that reaches out to your chatbot. Just by doing this step, you no longer have to always type your end point.
    1. Click on 'create a new bot configuration' in the Welcome page or File -> New Bot Configuration. 
+   ![1. create bot configuration.png](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Documentation/Microsoft%20Bot%20Framework%20Emulator/1.%20create%20bot%20configuration.png)
    2. Fill in the required fields and click save and connect:
      Currently, for a local chatbot we only need to fill in:
      1. Bot Name (Give it any name that will be easy for you to identify next time)
      2. End Point URL ("http://localhost:3978/api/messages")
         As we are building the chatbot locally, our endpoint now will be pointing to the localhost (our computer)
+        ![2. Fill in the configuration.png](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Documentation/Microsoft%20Bot%20Framework%20Emulator/2.%20Fill%20in%20the%20configuration.png)
+    3. Start selecting
+    ![3. start testing.png](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Documentation/Microsoft%20Bot%20Framework%20Emulator/3.%20start%20testing.png)
 
 ## Built With
 * Microsoft Bot Builder SDK
