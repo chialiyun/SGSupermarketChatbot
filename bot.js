@@ -193,7 +193,7 @@ class SGSuperMartBot {
                             default:
                                 // None or no intent identified, either way, let's provide some help
                                 // to the user
-                                await dc.context.sendActivity(`Sorry, I didn't understand what you just said to me.` + 
+                                await dc.context.sendActivity(`Sorry, I didn't understand what you just said to me. ` + 
                                 'You can try sending "promo for mango" to get the promotions available for mango or "promo for Giant" to get the advertisement promotions from Giant');
                                 break;
                         }
