@@ -29,25 +29,24 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 mkdir getbot
 cd getbot
 ```
-2. start nodejs project
-```
- npm init
- //You can press enter all the way.
-```
-3. install required packages
-```
- npm install --save botbuilder
- npm install --save restify
-```
-4. Clone the `SG Supermarket chatbot` locally. In a terminal, run:
+2. Clone the `SG Supermarket chatbot` locally. In a terminal, run:
 ```
 $ git clone https://github.com/chialiyun/SGSupermarketChatbot.git
+```
+3. Install all required packages
+```
+$ npm install
 ```
 
 #### Run the application
 1. In the same terminal, run:
 ```
 $ node index.js
+```
+
+This should show you:
+```
+$ restify listening to http://[::]:3978
 ```
 
 #### Test the application
