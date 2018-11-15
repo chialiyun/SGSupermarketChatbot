@@ -17,8 +17,13 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 4. Install Bot Framework Emulator (https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe)
 5. Azure Subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 
-## Deployment:
+## Local Deployment:
 ### Steps
+1. Clone the repo
+2. Run the application
+3. Test the application
+
+#### Clone the repo
 1. Create new project folder and change directory into it.
 ```
 mkdir getbot
@@ -34,45 +39,35 @@ cd getbot
  npm install --save botbuilder
  npm install --save restify
 ```
-4. Create a new file named "index.js" and copy the content into it.
+4. Clone the `SG Supermarket chatbot` locally. In a terminal, run:
 ```
- // Reference the packages we require so that we can use them in creating the bot
- const restify = require('restify');
- const botbuilder = require('botbuilder');
- 
- // Create bot adapter, which defines how the bot sends and receives messages.
- var adapter = new botbuilder.BotFrameworkAdapter({
-  appId: process.env.MicrosoftAppId,
-  appPassword: process.env.MicrosoftAppPassword
- });
-  
- // Create HTTP server.
- let server = restify.createServer();
- server.listen(process.env.port || process.env.PORT || 3978, function () {
-  console.log(`\n${server.name} listening to ${server.url}`);
- });
-  
- // Listen for incoming requests at /api/messages.
- server.post('/api/messages', (req, res) => {
-  // Use the adapter to process the incoming web request into a TurnContext object.
-  adapter.processActivity(req, res, async (turnContext) => {
-   // Do something with this incoming activity!
-   if (turnContext.activity.type === 'message') {            
-    // Get the user's text
-    const utterance = turnContext.activity.text;
-  
-    // send a reply
-    await turnContext.sendActivity(`I heard you say ${ utterance }`);
-   }
-  });
- });
+$ git clone https://github.com/chialiyun/SGSupermarketChatbot.git
 ```
-5. Run node index.js to make sure the bot is working
-6. Open Bot Framework Emulator and create a bot config pointing to your localhost endpoint
-7. Ensure the bot is working
+
+#### Run the application
+1. In the same terminal, run:
+```
+$ node index.js
+```
+
+#### Test the application
+1. Launch the `Microsoft Bot Framework Emulator`. You can read more about it [here](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started)
+
+2. Create a new bot configuration
+    Bot configuration is a file that keeps your settings that reaches out to your chatbot. Just by doing this step, you no longer have to always type your end point.
+   1. Click on 'create a new bot configuration' in the Welcome page or File -> New Bot Configuration. 
+   2. Fill in the required fields and click save and connect:
+     Currently, for a local chatbot we only need to fill in:
+     1. Bot Name (Give it any name that will be easy for you to identify next time)
+     2. End Point URL ("http://localhost:3978/api/messages")
+        As we are building the chatbot locally, our endpoint now will be pointing to the localhost (our computer)
 
 ## Built With
 * Microsoft Bot Builder SDK
+
+## Additional Reference Links
+1. Microsoft Bot Framework
+2. Bot Samples for NodeJS
 
 ## License
 ![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
