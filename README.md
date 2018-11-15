@@ -29,13 +29,18 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 #### Clone the repo
 1. Create new project folder and change directory into it.
 ```
-mkdir getbot
-cd getbot
+mkdir testChatbot
+cd testChatbot
 ```
 2. Clone the `SG Supermarket chatbot` locally. In a terminal, run:
 ```
 $ git clone https://github.com/chialiyun/SGSupermarketChatbot.git
 ```
+3. Change the directory in `SGSupermarketChatbot`
+```
+cd SGSupermarketChatbot
+```
+
 3. Install all required packages
 ```
 $ npm install
