@@ -11,11 +11,11 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 ![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Architecture%20Diagram.png)
 
 ### Prerequisites:
-1. Install NodeJS (https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi)
-2. Install Visual Studio Code* (https://code.visualstudio.com/)
-3. Install Git (https://git-scm.com/download/win)
-4. Install Bot Framework Emulator (https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe)
-5. Azure Subscription (https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+1. Install [NodeJS](https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi) - Programming Language used for SG Supermarket 
+2. Install [Visual Studio Code*](https://code.visualstudio.com/) - You may use this code editor to edit your codes
+3. Install [Git](https://git-scm.com/download/win) - Git for version control of your codes
+4. Install [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v4.0.0-preview.40025/botframework-emulator-setup-4.0.0-preview.40025.exe) - For Local testing of the chatbot before deployment
+5. [Azure Subscription](https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) - Required to publish the chatbot for public usage in the various platform (e.g. embed in webpage, Facebook Messenger, Telegram, Slack, etc.)
 
 ## Local Deployment:
 ### Steps
@@ -69,8 +69,8 @@ $ restify listening to http://[::]:3978
 * Microsoft Bot Builder SDK
 
 ## Additional Reference Links
-1. Microsoft Bot Framework
-2. Bot Samples for NodeJS
+1. [Microsoft Bot Framework](https://docs.microsoft.com/en-us/azure/bot-service/javascript/bot-builder-javascript-quickstart?view=azure-bot-service-4.0)
+2. [Bot Samples for NodeJS](https://github.com/Microsoft/BotBuilder-Samples)
 
 ## License
 ![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
