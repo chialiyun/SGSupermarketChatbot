@@ -19,9 +19,9 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 
 ## Local Deployment:
 ### Steps
-1. Clone the repo
-2. Run the application
-3. Test the application
+1. [Clone the repo](https://github.com/chialiyun/SGSupermarketChatbot#clone-the-repo)
+2. [Run the application](https://github.com/chialiyun/SGSupermarketChatbot#run-the-application)
+3. [Test the application](https://github.com/chialiyun/SGSupermarketChatbot#test-the-application)
 
 #### Clone the repo
 1. Create new project folder and change directory into it.
