@@ -10,6 +10,10 @@ See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more deta
 ### Architecture Diagram
 ![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Architecture%20Diagram.png)
 
+1. The developer creates the chatbot using Microsoft Bot Framework (Bot Builder SDK) and deploy the code into GitHub for version control.
+2. Azure Cloud Services is used to host the Chatbot. An Azure Web App is created to provide the endpoint for the web service that will be used to point at to access the chatbot and connect to Bot Service for publication of the Chatbot to other channels (Facebook Messenger in particular for SG Supermarket Chatbot). It get access to the codes via GitHub repository. Language Understanding Intelligent Service (LUIS) is used and connected to the Web App to bring intelligence to the chatbot to behave just like like human.
+3. Having published the application to the platform, end-users then interact with the chatbot
+
 ### Prerequisites:
 1. Install [NodeJS](https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi) - Programming Language used for SG Supermarket 
 2. Install [Visual Studio Code*](https://code.visualstudio.com/) - You may use this code editor to edit your codes
