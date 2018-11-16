@@ -7,6 +7,7 @@ These instructions will get you a copy of the project up and running on your loc
 See [Wiki](https://github.com/chialiyun/SGSupermarketChatbot/wiki) for more details on how to deploy the project on a live system and other sample codes.
 
 ### Architecture Diagram
+Here is how the different services are used and connected in my solution.
 ![Architecture diagram](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Architecture%20Diagram.png)
 
 1. The developer creates the chatbot using Microsoft Bot Framework (Bot Builder SDK) and deploy the code into GitHub for version control.
