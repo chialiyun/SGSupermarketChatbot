@@ -1,4 +1,4 @@
-# SG SuperMarket Chatbot
+# SG Supermarket Chatbot
 SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.
 ![Banner](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Banner.png)
 
