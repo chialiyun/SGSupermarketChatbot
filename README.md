@@ -42,7 +42,7 @@ $ git clone https://github.com/chialiyun/SGSupermarketChatbot.git
 cd SGSupermarketChatbot
 ```
 
-3. Install all required packages
+4. Install all required packages
 ```
 $ npm install
 ```
