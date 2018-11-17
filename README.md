@@ -1,4 +1,4 @@
-# SG SuperMarket Bot
+# SG SuperMarket Chatbot
 SG Supermarket bot allow users to easily access SG Supermarket promotions through this bot.
 ![Banner](https://github.com/chialiyun/SGSupermarketChatbot/blob/master/image/Banner.png)
 
@@ -28,7 +28,7 @@ Here is how the different services are used and connected in my solution.
 3. [Test the application](https://github.com/chialiyun/SGSupermarketChatbot#test-the-application)
 
 #### Clone the repo
-1. Clone the `SG Supermarket chatbot` locally. In a terminal, run:
+1. Clone the `SGSupermarketChatbot` locally. In a terminal, run:
 ```
 $ git clone https://github.com/chialiyun/SGSupermarketChatbot.git
 ```
