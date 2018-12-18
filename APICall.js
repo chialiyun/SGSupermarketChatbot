@@ -229,7 +229,7 @@ async function getGiantProduct(name) {
             } else {
                 product[PRODUCT_DISCOUNTED_PRICE] = currentPrice;
 
-                const originalPrice = productData.find('.content_price .product-price').attr('data-price');
+                const originalPrice = productData.find('.content_info span').text();
                 product[PRODUCT_ORIGINAL_PRICE] = originalPrice;
             }
 
